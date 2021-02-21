@@ -1,0 +1,36 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Julian George's Personal Portfolio Site",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src -d ./ & browserify index.js > compiled.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Julian George <julian@juliangeorge.net> (juliangeorge.net)",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-react": "^7.12.13",
+    "@babel/register": "^7.12.13",
+    "@material-ui/core": "^4.11.3",
+    "browserify": "^17.0.0",
+    "gsap": "^3.6.0",
+    "less": "^4.1.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-spring": "^8.0.27",
+    "three-js": "^79.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.17",
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  }
+}

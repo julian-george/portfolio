@@ -1,0 +1,282 @@
+@charset "utf-8";
+body {
+	background-color: lightskyblue;
+	top:0;
+	position:absolute;
+	width:100%;
+	margin:0;
+}
+#bg-image{
+	position:absolute;
+	width:100%;
+	height:1100px;
+	top:0;
+	left:0;
+	background: url(bg.jpeg);
+	filter: blur(8px);
+  -webkit-filter: blur(8px);
+	z-index:-2;
+	object-fit:cover;
+}
+.card {
+	width:380px;
+	height:240px;
+	margin:72px auto;
+	margin-bottom:0;
+	background-color:black;
+	border-radius:15px;
+}
+#back-card{
+	z-index:-1;
+	top:-330px;
+	position:relative;
+}
+#front-top-half{
+	height:166px;
+	background-color:#0b4201;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+}
+#front-bottom-half{
+	height:74px;
+	background-color:#f9fbd0;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	display:flex;
+}
+#dartmouth {
+	font-family:Ruzicka;
+	src:url("DartmouthRuzicka-Regular.ttf");
+	font-size:66px;
+	color:#f9fbd0;
+	margin-left:12px;
+	font-weight:400;
+}
+#dartmouth > img {
+	height:48px;
+	margin-left:12px;
+	margin-bottom:0;
+}
+#second-row {
+	display:flex;
+}
+#second-row > div {
+	margin-top:-6px;
+}
+#picture {
+	margin-left:12px;
+	width:112px;
+	height:124px;
+	background-color:white;
+	overflow:hidden;
+	background-color:#f9fbd0;
+}
+#picture > img {
+	margin-top:4px;
+	width:90%;
+	left:5%;
+	position:relative;
+}
+#picture > canvas {
+	z-index: 1;
+	position: absolute;
+	width: 112px;
+	height: 124px;
+}
+#image-edit:{
+	position: absolute;
+	z-index: 2;
+	height: 24px;
+	width: 24px;
+}
+#info {
+	width: 204px;
+	height:72px;
+	background-color:white;
+	margin-left: 24px;
+	border-radius:8px;
+}
+#info-name{
+	font-family:Arial;
+	font-size:14px;
+	margin-left:2px;
+	margin-bottom:2px;
+}
+.info-item{
+	font-size:12px;
+	font-family:Arial;
+	font-weight:600;
+	margin-left:2px;
+	margin-bottom:4px;
+}
+#barcode >img {
+	width:220px;
+	height:40px;
+	
+}
+#barcode {
+	width:220px;
+	height:40px;
+	left: 38px;
+	top:6px;
+	position:relative;
+	text-align:center;
+	font-family:Arial;
+	font-size:14px;
+}
+#picture-label {
+	margin-left:40px;
+	margin-top:42px;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:600
+}
+#back-top-half {
+	background-color:#f9fbd0;
+	border-top-left-radius:15px;
+	border-top-right-radius:15px;
+	height:20px;
+}
+#back-bottom-half{
+	background-color:#f9fbd0;
+	border-bottom-left-radius:15px;
+	border-bottom-right-radius:15px;
+	height:164px;
+	position:relative;
+	top:56px
+}
+#aboutme{
+	font-family:Roboto;
+	width:95%;
+	left:2.5%;
+	height:100px;
+	position:relative;
+	top:24px;
+	font-size:10px;
+	font-weight:500;
+}
+#options-row {
+	display:flex;
+	width:360px;
+	margin:0 auto;
+	color:white;
+	font-family:Arial;
+	font-size:14px;
+}
+#options-row>div:hover{
+	color:#C1C1C1
+}
+#options-row>div:active{
+	color:#8F8F8F
+}
+#options-row>div{
+	width:50%;
+}
+#flip {
+	text-align:right;
+	cursor:pointer;
+}
+#flip > img{
+	height:14px;
+	transform:rotate(180deg);
+	position:relative;
+	top:2px;
+}
+#makerform{
+	width: 360px;
+    margin: 0 auto;
+    top: -308px;
+    position: relative;
+	background-color: rgba(220,220,220,.4);
+	padding:24px;
+	border-radius:2px;
+}
+#makerform-title{
+	width:100%;
+	font-size:24px;
+	text-align:center;
+	font-family:Arial;
+	font-weight:600;
+	margin-bottom:16px;
+}
+#close-button{
+	position:absolute;
+	right:4px;
+	top:0;
+	
+}
+.toggleform{
+	cursor:pointer
+}
+label {
+	vertical-align:middle;
+	font-family:Arial;
+}
+.inline-inputs {
+	display:flex;
+}
+.inline-inputs>input{
+	width:24px;
+}
+#byear-input{
+	width:50%;
+}
+input {
+	border-radius:2px;
+	height:18px;
+	border:0;
+	padding:4px;
+	width:100%;
+	margin-bottom:4px;
+}
+.inline-inputs>div{
+	text-align:center;
+}
+.inline-inputs>div>label{
+	margin-bottom:8px;
+}
+.inline-inputs>div>input{
+	width:30%;
+}
+textarea{
+	border-radius:2px;
+	padding:4px;
+	width:100%;
+	margin: 4px 0;
+	font-family:Arial;
+	font-size:12px;
+}
+.form-table>div{
+	width:50%;
+}
+.form-table>div>div{
+	height:28px;
+}
+#photo-help {
+	font-size:12px;
+	font-family:Arial;
+}
+#buttonrow {
+	text-align:right;
+}
+button {
+	border:0;
+	padding:4px;
+	cursor:pointer;
+}
+#update-button{
+	background-color:#0b4201;
+	color:white;
+}
+#update-button:hover{
+	background-color:#062700;
+}
+#update-button:active{
+	background-color:#031900;
+}
+#reset-button:hover{
+	background-color:#C1C1C1
+}
+#reset-button:active{
+	background-color:#8F8F8F
+}
