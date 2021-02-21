@@ -68,6 +68,14 @@ Goals:
 3. Make good code so I can use this portfolio for a while
 */
 
+/* TODO:
+- Add links to visit project sites
+- Add outline to J
+- Divide up this file by component
+- Fix timeline
+- Finalize colors
+*/
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -323,13 +331,15 @@ var Timeline = function Timeline(props) {
     title: "Portfolio",
     date: "February 2021",
     technologies: ["HTML/CSS", "Javascript", "React", "Threejs", "Figma", "react-spring"],
-    description: "My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled."
+    description: "My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled.",
+    github: "https://github.com/FudgeDaMuffin/portfolio"
   }, {
     name: "academicchallenge",
     title: "Academic Challenge",
     date: "January-February 2021",
     technologies: ["HTML/CSS", "Javascript", "Nodejs", "MongoDB", "React", "Socket.io", "Bash"],
-    description: "This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills."
+    description: "This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills.",
+    github: "https://github.com/FudgeDaMuffin/academic-challenge"
   }, {
     name: "idsite",
     title: "Dartmouth ID Maker",
