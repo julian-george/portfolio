@@ -2,17 +2,18 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _Fade = _interopRequireDefault(require("@material-ui/core/Fade"));
 
-var _Collapse = _interopRequireDefault(require("@material-ui/core/Collapse"));
-
-var _gsap = require("gsap");
-
-var _Bio = _interopRequireDefault(require("./Bio.js"));
+var _Timeline = _interopRequireDefault(require("./Timeline.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -40,28 +41,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var screen = {
-  width: 1200,
-  height: 900,
-  aspect: 1400 / 900
-}; //this variable defines what the hue at the left of the color slider is
-
 var startingHue = 34;
-/* 
-Goals:
-1. Better Project Structuring (no CDN links)
-2. Use code in new ways to improve aesthetic and design
-3. Make good code so I can use this portfolio for a while
-*/
-
-/* TODO:
-- Add links to visit project sites
-- Add outline to J
-- Divide up this file by component
-- Fix timeline by restyling everything
-- Finalize colors
-- Create day mode?
-*/
 
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
@@ -73,7 +53,8 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, App);
 
-    _this = _super.call(this, props); //function for the color slider, says that the slider is active when its clicked, setting base hue and position to be compared with later
+    _this = _super.call(this, props);
+    _this.moused = false;
 
     _this.handleClick = function (event) {
       _this.setState({
@@ -90,10 +71,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       nameDisplacement: 0,
       sliderActive: false,
       bioActive: false
-    }; // adds an event listener for the color slider whenever the mouse moves
-
+    };
     document.addEventListener('mousemove', function (e) {
-      // if the slider is active, change the hue (and therefore the slider position) accordingly
       if (_this.state.sliderActive) {
         var futureHue = _this.state.baseHue + (e.clientX - _this.state.basePos) * 2;
         if (futureHue > 360 + startingHue) futureHue = 360 + startingHue;else if (futureHue < startingHue) futureHue = startingHue;
@@ -102,19 +81,15 @@ var App = /*#__PURE__*/function (_React$Component) {
           hue: futureHue
         });
       }
-    }); // event listener for ending the slider edits
-
+    });
     document.addEventListener('mouseup', function (e) {
       if (_this.state.sliderActive) _this.setState({
         sliderActive: false,
         baseHue: _this.state.hue
       });
-    }); // event slider to trigger the bio fadein and to move the name and slider down (will change moving down animation to make more smooth)
-
+    });
     document.addEventListener('scroll', function (e) {
-      // screen.height/3 is a somewhat arbitrary number but it was a nice place to start the transition
       if (window.scrollY > screen.height / 3) {
-        // this.state.nameDisplacement is vertical displacement of name, its 80 by default to put it in the threejs canvas
         _this.setState({
           nameDisplacement: Math.min(window.scrollY - screen.height / 3, 80)
         });
@@ -129,8 +104,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       }
     });
     return _this;
-  } //whenever the state changes, change the threejs J to the new hue
-
+  }
 
   _createClass(App, [{
     key: "componentDidUpdate",
@@ -140,7 +114,6 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // various colors used that are dependent on the hue
       var fullContainerColor = "hsl(" + this.state.hue + ",55%,3%)";
       var canvasContainerColor = "hsl(" + this.state.hue + ",5%,13%)";
       var tintedTextColor = "hsl(" + this.state.hue + ",30%,79%)";
@@ -177,7 +150,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         }
       }))), /*#__PURE__*/_react["default"].createElement("div", {
         id: "sliderLabel"
-      }, "change color"))), /*#__PURE__*/_react["default"].createElement(_Bio["default"], {
+      }, "change color"))), /*#__PURE__*/_react["default"].createElement(Bio, {
         hue: this.state.hue,
         active: this.state.bioActive
       })), /*#__PURE__*/_react["default"].createElement("div", {
@@ -185,65 +158,134 @@ var App = /*#__PURE__*/function (_React$Component) {
         style: {
           backgroundColor: footerColor
         }
-      }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, "Fully Designed and Developed By Julian George"), /*#__PURE__*/_react["default"].createElement("div", null, "Copyright \xA9 2021 Julian George. All rights reserved."))));
+      }, /*#__PURE__*/_react["default"].createElement("div", null, "Fully Designed and Developed By Julian George"), /*#__PURE__*/_react["default"].createElement("div", null, "Copyright \xA9 2021 Julian George. All rights reserved.")));
     }
   }]);
 
   return App;
 }(_react["default"].Component);
 
-var domContainer = document.getElementById('react-content');
+var Bio = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Bio, _React$Component2);
 
-_reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(App, null), domContainer); // threejs boilerplate code
+  var _super2 = _createSuper(Bio);
 
+  function Bio(props) {
+    var _this2;
 
-var scene = new THREE.Scene();
-scene.background = new THREE.Color(0x262422);
-var camera = new THREE.PerspectiveCamera(75, screen.aspect, 0.1, 10000);
-camera.position.set(-300, 0, 0);
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(screen.width, screen.height);
-var cont = document.getElementById("canvasContainer"); // orbitControls gives ability to grab and move around
+    _classCallCheck(this, Bio);
 
-var controls = new THREE.OrbitControls(camera, cont); // I don't want users to scroll out or move around
+    _this2 = _super2.call(this, props);
+    _this2.skills = ["HTML", "CSS", "Javascript", "Nodejs", "MongoDB", "React", "Java", "Figma"];
+    _this2.timeline = {
+      bubbleSize: 160,
+      width: 1050,
+      bubbleDisp: (1050 - 160 * 3) / 2
+    };
+    return _this2;
+  }
 
-controls.enableZoom = false;
-controls.enablePan = false;
-cont.appendChild(renderer.domElement); // this will be used to store imported J model
+  _createClass(Bio, [{
+    key: "render",
+    value: function render() {
+      var _this3 = this;
 
-var letterJ;
-var objLoader = new THREE.OBJLoader();
-objLoader.load('LetterJ.obj', function (object) {
-  object = object.children[0]; // taking geometry out of object and giving it new material so that the hue can be altered
+      var skillComponents = this.skills.map(function (s, index) {
+        return /*#__PURE__*/_react["default"].createElement(Skill, {
+          hue: _this3.props.hue,
+          name: s,
+          key: index
+        });
+      });
+      var saturatedColor = "hsl(" + this.props.hue + ",80%,40%)";
+      return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
+        "in": this.props.active,
+        timeout: 500
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "bioContainer"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "toprow"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "leftBio"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "bio-head"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "avatar",
+        style: {
+          backgroundColor: saturatedColor
+        }
+      }), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "personalinfo"
+      }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Dartmouth '24"), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "socialrow"
+      }, /*#__PURE__*/_react["default"].createElement("a", {
+        href: "https://www.linkedin.com/in/julian-george-33b42a1b3/",
+        target: "_blank"
+      }, /*#__PURE__*/_react["default"].createElement("img", {
+        src: "logos/linkedin.png"
+      })), /*#__PURE__*/_react["default"].createElement("a", {
+        href: "https://twitter.com/muffinner",
+        target: "_blank"
+      }, /*#__PURE__*/_react["default"].createElement("img", {
+        src: "logos/twitter.png"
+      })), /*#__PURE__*/_react["default"].createElement("a", {
+        href: "https://github.com/FudgeDaMuffin",
+        target: "_blank"
+      }, /*#__PURE__*/_react["default"].createElement("img", {
+        src: "logos/github.png",
+        href: "https://github.com/FudgeDaMuffin"
+      }))))), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "bio-body"
+      }, "I\u2019m a Dartmouth first-year with a passion for web development. I've been making websites since middle school, honing my skills continuously with countless personal projects, the best of which you can browse below. I plan to double major in computer science and music. I grew up in Haddonfield, New Jersey, and currently live just outside of it in Cherry Hill. When I'm not working, I love to hike, work out, make music, play video games, and bike.")), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "skills"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "skillTitle"
+      }, "Primary Skills"), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "skillGrid"
+      }, skillComponents))), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "timelineContainer"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "timelinetitle"
+      }, "My Projects"), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "timelinebody"
+      }, /*#__PURE__*/_react["default"].createElement(_Timeline["default"], {
+        hue: this.props.hue,
+        timeline: this.timeline
+      })))));
+    }
+  }]);
 
-  var material = new THREE.MeshBasicMaterial({
-    color: "hsl(" + startingHue + ",65%,40%)"
-  });
-  var mesh = new THREE.Mesh(object.geometry, material); //initializing J and setting initial attributes
+  return Bio;
+}(_react["default"].Component);
 
-  letterJ = mesh;
-  letterJ.position.set(0, 0, 0);
-  letterJ.scale.set(.25, .25, .25);
-  letterJ.rotation.y = Math.PI;
-  scene.add(letterJ); //colorEdges()
+var Skill = /*#__PURE__*/function (_React$Component3) {
+  _inherits(Skill, _React$Component3);
 
-  animate();
-}); // function to add colored edges, I need to edit the model in the future to make sure this colors the right edges 
+  var _super3 = _createSuper(Skill);
 
-var colorEdges = function colorEdges() {
-  var geometry = new THREE.EdgesGeometry(letterJ.geometry, 30);
-  var material = new THREE.LineBasicMaterial({
-    color: 0x222222,
-    linewidth: 2
-  });
-  var edges = new THREE.LineSegments(geometry, material);
-  letterJ.add(edges);
-}; // calls itself recursively to create the automatic rotation
+  function Skill(props) {
+    _classCallCheck(this, Skill);
 
+    return _super3.call(this, props);
+  }
 
-var animate = function animate() {
-  requestAnimationFrame(animate);
-  letterJ.rotation.y += 0.005;
-  renderer.render(scene, camera);
-  controls.update();
-};
+  _createClass(Skill, [{
+    key: "render",
+    value: function render() {
+      var bgColor = "hsl(" + this.props.hue + ",10%,15%)";
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        className: "skill",
+        style: {
+          backgroundColor: bgColor
+        }
+      }, /*#__PURE__*/_react["default"].createElement("img", {
+        src: "logos/" + this.props.name.toLowerCase() + ".png"
+      }), /*#__PURE__*/_react["default"].createElement("span", null, this.props.name));
+    }
+  }]);
+
+  return Skill;
+}(_react["default"].Component);
+
+var _default = App;
+exports["default"] = _default;
