@@ -19,6 +19,8 @@ class Bio extends React.Component {
         // converting skill array into < Skill /> components
         let skillComponents=this.skills.map((s,index)=>(<Skill hue={this.props.hue} name={s} key={index}/>))
         let saturatedColor="hsl("+this.props.hue+",80%,40%)"
+        let avatarColor="hsl("+this.props.hue+",85%,30%)"
+                                                        
         // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
         return(
             <Fade in={this.props.active} timeout={500}>
@@ -26,14 +28,16 @@ class Bio extends React.Component {
                     <div id="toprow">
                         <div id="leftBio">
                             <div id ="bio-head">
-                                <div id="avatar" style={{backgroundColor:saturatedColor}}></div>
+                                <div id="avatar" style={{backgroundColor:avatarColor}}>
+                                    <img src="avatar.jpeg" />
+                                </div>
                                 <div id="personalinfo">
                                     <div>julian@juliangeorge.net</div>
                                     <div>Cherry Hill, NJ</div>
                                     <div>Dartmouth '24</div>
                                     <div id="socialrow">
                                         <a href="https://www.linkedin.com/in/julian-george-33b42a1b3/" target="_blank"><img src="logos/linkedin.png" /></a>
-                                        <a href="https://twitter.com/muffinner" target="_blank"><img src="logos/twitter.png" /></a>
+                                        <a href="https://twitter.com/JulianGeorgeDev" target="_blank"><img src="logos/twitter.png" /></a>
                                         <a href="https://github.com/FudgeDaMuffin" target="_blank"><img src="logos/github.png" href="https://github.com/FudgeDaMuffin"/></a>
                                     </div>
                                 </div>

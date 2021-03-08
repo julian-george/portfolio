@@ -101,7 +101,7 @@ function Timeline(props) {
   }); // these two determine how much to move the timeline with each click, and the maximum amount of movement
 
   var moveAmount = props.timeline.bubbleSize + props.timeline.bubbleDisp;
-  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize); // setting initial line displacement
+  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 40); // setting initial line displacement
 
   var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),

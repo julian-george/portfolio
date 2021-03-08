@@ -145,7 +145,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       var canvasContainerColor = "hsl(" + this.state.hue + ",5%,13%)";
       var tintedTextColor = "hsl(" + this.state.hue + ",30%,79%)";
       var letterColor = "hsl(" + this.state.hue + ",80%,40%)";
-      var footerColor = "hsl(" + this.state.hue + ",60%,50%)";
+      var footerColor1 = "hsla(" + this.state.hue + ",60%,50%,.6)";
+      var footerColor2 = "hsla(" + this.state.hue + ",60%,50%,1)";
       return /*#__PURE__*/_react["default"].createElement("div", {
         id: "fullContainer",
         style: {
@@ -183,7 +184,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/_react["default"].createElement("div", {
         id: "footer",
         style: {
-          backgroundColor: footerColor
+          background: "linear-gradient(315deg, " + footerColor1 + "0%, " + footerColor2 + "60%)",
+          color: fullContainerColor
         }
       }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, "Fully Designed and Developed By Julian George"), /*#__PURE__*/_react["default"].createElement("div", null, "Copyright \xA9 2021 Julian George. All rights reserved."))));
     }

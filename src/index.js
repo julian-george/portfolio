@@ -74,7 +74,9 @@ class App extends React.Component {
         let canvasContainerColor="hsl("+this.state.hue+",5%,13%)"
         let tintedTextColor="hsl("+this.state.hue+",30%,79%)"
         let letterColor="hsl("+this.state.hue+",80%,40%)"
-        let footerColor="hsl("+this.state.hue+",60%,50%)"
+        let footerColor1="hsla("+this.state.hue+",60%,50%,.6)"
+        let footerColor2="hsla("+this.state.hue+",60%,50%,1)"
+        
         return (
             <div id = "fullContainer" style={{backgroundColor:fullContainerColor}}> 
                 <div id="canvasContainer">
@@ -93,7 +95,7 @@ class App extends React.Component {
                     </div>
                     < Bio hue={this.state.hue} active={this.state.bioActive}/>
                 </div>
-                <div id="footer" style={{backgroundColor:footerColor}}>
+                <div id="footer" style={{background: "linear-gradient(315deg, "+footerColor1+"0%, "+footerColor2+"60%)",color:fullContainerColor }}>
                     <div>
                         <div>Fully Designed and Developed By Julian George</div>
                         <div>Copyright © 2021 Julian George. All rights reserved.</div>

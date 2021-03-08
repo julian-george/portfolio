@@ -76,7 +76,8 @@ var Bio = /*#__PURE__*/function (_React$Component) {
           key: index
         });
       });
-      var saturatedColor = "hsl(" + this.props.hue + ",80%,40%)"; // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
+      var saturatedColor = "hsl(" + this.props.hue + ",80%,40%)";
+      var avatarColor = "hsl(" + this.props.hue + ",85%,30%)"; // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
 
       return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
         "in": this.props.active,
@@ -92,9 +93,11 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/_react["default"].createElement("div", {
         id: "avatar",
         style: {
-          backgroundColor: saturatedColor
+          backgroundColor: avatarColor
         }
-      }), /*#__PURE__*/_react["default"].createElement("div", {
+      }, /*#__PURE__*/_react["default"].createElement("img", {
+        src: "avatar.jpeg"
+      })), /*#__PURE__*/_react["default"].createElement("div", {
         id: "personalinfo"
       }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Dartmouth '24"), /*#__PURE__*/_react["default"].createElement("div", {
         id: "socialrow"
@@ -104,7 +107,7 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "logos/linkedin.png"
       })), /*#__PURE__*/_react["default"].createElement("a", {
-        href: "https://twitter.com/muffinner",
+        href: "https://twitter.com/JulianGeorgeDev",
         target: "_blank"
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "logos/twitter.png"

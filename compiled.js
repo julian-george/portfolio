@@ -77,7 +77,8 @@ var Bio = /*#__PURE__*/function (_React$Component) {
           key: index
         });
       });
-      var saturatedColor = "hsl(" + this.props.hue + ",80%,40%)"; // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
+      var saturatedColor = "hsl(" + this.props.hue + ",80%,40%)";
+      var avatarColor = "hsl(" + this.props.hue + ",85%,30%)"; // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
 
       return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
         "in": this.props.active,
@@ -93,9 +94,11 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/_react["default"].createElement("div", {
         id: "avatar",
         style: {
-          backgroundColor: saturatedColor
+          backgroundColor: avatarColor
         }
-      }), /*#__PURE__*/_react["default"].createElement("div", {
+      }, /*#__PURE__*/_react["default"].createElement("img", {
+        src: "avatar.jpeg"
+      })), /*#__PURE__*/_react["default"].createElement("div", {
         id: "personalinfo"
       }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Dartmouth '24"), /*#__PURE__*/_react["default"].createElement("div", {
         id: "socialrow"
@@ -105,7 +108,7 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "logos/linkedin.png"
       })), /*#__PURE__*/_react["default"].createElement("a", {
-        href: "https://twitter.com/muffinner",
+        href: "https://twitter.com/JulianGeorgeDev",
         target: "_blank"
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "logos/twitter.png"
@@ -275,7 +278,7 @@ function Timeline(props) {
   }); // these two determine how much to move the timeline with each click, and the maximum amount of movement
 
   var moveAmount = props.timeline.bubbleSize + props.timeline.bubbleDisp;
-  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize); // setting initial line displacement
+  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 40); // setting initial line displacement
 
   var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -664,7 +667,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       var canvasContainerColor = "hsl(" + this.state.hue + ",5%,13%)";
       var tintedTextColor = "hsl(" + this.state.hue + ",30%,79%)";
       var letterColor = "hsl(" + this.state.hue + ",80%,40%)";
-      var footerColor = "hsl(" + this.state.hue + ",60%,50%)";
+      var footerColor1 = "hsla(" + this.state.hue + ",60%,50%,.6)";
+      var footerColor2 = "hsla(" + this.state.hue + ",60%,50%,1)";
       return /*#__PURE__*/_react["default"].createElement("div", {
         id: "fullContainer",
         style: {
@@ -702,7 +706,8 @@ var App = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/_react["default"].createElement("div", {
         id: "footer",
         style: {
-          backgroundColor: footerColor
+          background: "linear-gradient(315deg, " + footerColor1 + "0%, " + footerColor2 + "60%)",
+          color: fullContainerColor
         }
       }, /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", null, "Fully Designed and Developed By Julian George"), /*#__PURE__*/_react["default"].createElement("div", null, "Copyright \xA9 2021 Julian George. All rights reserved."))));
     }

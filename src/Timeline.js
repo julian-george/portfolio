@@ -44,7 +44,7 @@ export default function Timeline (props) {
         }].map((p,index)=>(<Project key={index} hue={props.hue} disp={props.timeline.bubbleDisp*index} project={p} ></Project>))
     // these two determine how much to move the timeline with each click, and the maximum amount of movement
     const moveAmount = props.timeline.bubbleSize+props.timeline.bubbleDisp
-    const maxDisp=-(moveAmount*(projects.length-3)+props.timeline.bubbleSize)
+    const maxDisp=-(moveAmount*(projects.length-3)+props.timeline.bubbleSize+40)
     // setting initial line displacement
     const [lineDisplacement, setDisp] = useState(0)
     // left and right active show that the left and right movement buttons are clickable; if theyre false that means that the buttons are greyed out and uninteractable
