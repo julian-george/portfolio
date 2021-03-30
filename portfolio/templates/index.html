@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Julian's Portfolio</title>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="description" content="My web development portfolio: look at my skills, my projects, and learn a bit about me!" >
+        <link rel="icon" href="{% static 'favicon.png' %}">
+
+        <script src="{% static 'less.js-master/dist/less.min.js' %}"></script>
+        <script src="{% static 'three.js-master/build/three.min.js' %}"></script>
+        <script src="{% static 'three.js-master/examples/js/controls/OrbitControls.js' %}"></script>
+        <script src="{% static 'three.js-master/examples/js/loaders/MTLLoader.js' %}"></script>
+        <script src="{% static 'three.js-master/examples/js/loaders/OBJLoader.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'index.css' %}">
+         
+    </head>  
+    <body>
+        <div id="react-content">
+        </div> 
+        
+    </body>
+    <script src="{% static 'js/compiled.js' %}"></script>
+    
+</html>

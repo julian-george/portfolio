@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Julian George's Site</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="personal.js"></script>
+
+	<link rel="stylesheet" href="personal.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	
+</head>
+<body>
+	<div id="bg-image"></div>
+	<div class = "card" id="front-card">
+		<div id = "front-top-half">
+			<div id = "dartmouth">Dartmouth<img src="dmouth_seal.png"/></div>
+			<div id = "second-row">
+				<div id = "picture">
+					<img id="id-photo" src="idphoto.JPG"/>
+				</div>
+				<div id = "info">
+					<div id = "info-name">GEORGE, JULIAN C</div>
+					<div id="info-email" class="info-item" style="color:#8d3573">julian.c.george.24@dartmouth.edu</div>
+					<div id="info-birth" class="info-item">DOB &nbsp;&nbsp;&nbsp;&nbsp;4/1/2002</div>
+					<div id="info-from" class="info-item">FROM &nbsp;Haddonfield, NJ</div>
+				</div>
+			</div>
+		</div>
+		<div id = "front-bottom-half">
+			<div id = "picture-label">STUDENT</div>
+			<div id = "barcode">
+				<img src="barcode.png">
+				<span>10101010101010</span>
+			</div>
+		</div>
+	</div>
+	<div id="options-row">
+		<div id="makenew" class="toggleform">Make Your Own ID</div>
+		<div id="flip">Flip <img src="curved-arrow-pointing-down.png"/></div>
+	</div>
+	<div class = "card" id="back-card">
+		<div id="back-top-half"></div>
+		<div id="back-bottom-half">
+			<div id="aboutme">Hello! I'm a '24 who loves web development! I've done lots of full-stack dev projects, dealing with technologies from html/css to nodejs to mongoDB. I love web development because overcoming an impossible bug, successfully implementing a newly-learned technology, and overall creating a beautiful, functional site gives me a lot of satisfaction. I'm excited to work with DALI so I can become a professional-level dev, so I can solve exciting problems, and so I can meet and connect with people with similar passions as me. Outside of programming, I love nature (as evidenced by the background), hiking around New Hampshire's beautiful trails, making music on my piano or my DAW, and hitting the gym. I hope I will get to know all of you at DALI!</div>
+		</div>
+	</div>
+	<div id = "makerform">
+		<div id ="close-button" class="toggleform">✖</div>
+		<div id="makerform-title">Make your own Dartmouth ID</div>
+		<div class= "form-table" style="display:flex">
+			<div class="table-labels">
+				<div><label for="fname-input">First Name</label></div>
+				<div><label for="lname-input">Last Name</label></div>
+				<div><label for="mname-input">Middle Name</label></div>
+				<div><label for="location-input">Location</label></div>
+				<div><label for="email-input">Email address</label></div>
+			</div>
+			<div class="table-inputs">
+				<div><input  id="fname-input" placeholder="Enter your first name" maxlength="8"></div>
+				<div><input  id="lname-input" placeholder="Enter your last name" maxlength="11"></div>
+				<div><input  id="mname-input" placeholder="Enter your middle name" maxlength="20"></div>
+				<div><input  id="location-input" placeholder="Where are you from?" maxlength="19"></div>
+				<div><input type="email"  id="email-input" placeholder="Enter your email address" maxlength="33"></div>
+			</div>
+		</div>
+		<div class="inline-inputs">
+			<!--length controlling for these number inputs taken from Maycow Moura's response on this StackOverflow question: https://stackoverflow.com/questions/18510845/maxlength-ignored-for-input-type-number-in-chrome -->
+			<div>
+				<label for="bmonth-input">Birth Month</label><br>
+    			<input id="bmonth-input" type="number"  onkeydown="if(this.value.length==2 && event.keyCode!=8) return false;"placeholder="M">
+			</div>
+			<div>
+				<label for="bday-input">Birth Day</label><br>
+    			<input  id="bday-input" type="number"  onkeydown="if(this.value.length==2 && event.keyCode!=8) return false;"placeholder="D">
+			</div>
+			<div>
+				<label for="byear-input">Birth Year</label><br>
+    			<input  id="byear-input" type="number" onkeydown="if(this.value.length==4 && event.keyCode!=8) return false;" placeholder="Year" >
+			</div>
+		</div>
+		<div>
+			<div><label for="about-input">Description</label></div>
+			<div><textarea  id="about-input" placeholder="Talk about yourself" maxlength="800"></textarea></div>
+		</div>
+		<label for="photo-input">ID Picture</label>
+		<div id ="photo-help">Works best with pictures taken in portrait mode</div>
+		<input id="photo-input" type="file" accept="image/*" onchange="loadFile(event)" style="padding:0;margin-top:4px;border:0;padding:2px">
+		<div id ="buttonrow">
+			<button id="reset-button"onclick="resetID()">Reset ID</button>
+			<button id="update-button" onclick="updateID()">Update ID</button>
+		</div>
+	</div>
+</body>
+</html>
