@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
+  "version": "1.0.0", 
   "description": "Julian George's Personal Portfolio Site",
   "main": "index.js",
   "scripts": {
