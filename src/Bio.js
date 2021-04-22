@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import Fade from '@material-ui/core/Fade';
 
 import Timeline from "./Timeline.js"

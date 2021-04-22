@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import {useSpring, animated} from 'react-spring'
 import Fade from '@material-ui/core/Fade';
 

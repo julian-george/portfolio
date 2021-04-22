@@ -6,13 +6,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
-var _Fade = _interopRequireDefault(require("@material-ui/core/Fade"));
-
-var _Collapse = _interopRequireDefault(require("@material-ui/core/Collapse"));
-
-var _gsap = require("gsap");
-
 var _Bio = _interopRequireDefault(require("./Bio.js"));
+
+var _BioHeader = _interopRequireDefault(require("./BioHeader.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -73,61 +69,11 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, App);
 
-    _this = _super.call(this, props); //function for the color slider, says that the slider is active when its clicked, setting base hue and position to be compared with later
-
-    _this.handleClick = function (event) {
-      _this.setState({
-        sliderActive: true,
-        baseHue: _this.state.hue,
-        basePos: event.clientX
-      });
-    };
-
+    _this = _super.call(this, props);
     _this.state = {
       hue: startingHue,
-      baseHue: startingHue,
-      basePos: 0,
-      nameDisplacement: 0,
-      sliderActive: false,
       bioActive: false
-    }; // adds an event listener for the color slider whenever the mouse moves
-
-    document.addEventListener('mousemove', function (e) {
-      // if the slider is active, change the hue (and therefore the slider position) accordingly
-      if (_this.state.sliderActive) {
-        var futureHue = _this.state.baseHue + (e.clientX - _this.state.basePos) * 2;
-        if (futureHue > 360 + startingHue) futureHue = 360 + startingHue;else if (futureHue < startingHue) futureHue = startingHue;
-
-        _this.setState({
-          hue: futureHue
-        });
-      }
-    }); // event listener for ending the slider edits
-
-    document.addEventListener('mouseup', function (e) {
-      if (_this.state.sliderActive) _this.setState({
-        sliderActive: false,
-        baseHue: _this.state.hue
-      });
-    }); // event slider to trigger the bio fadein and to move the name and slider down (will change moving down animation to make more smooth)
-
-    document.addEventListener('scroll', function (e) {
-      // screen.height/3 is a somewhat arbitrary number but it was a nice place to start the transition
-      if (window.scrollY > screen.height / 3) {
-        // this.state.nameDisplacement is vertical displacement of name, its 80 by default to put it in the threejs canvas
-        _this.setState({
-          nameDisplacement: Math.min(window.scrollY - screen.height / 3, 80)
-        });
-
-        if (!_this.state.bioActive & _this.state.nameDisplacement == 80) _this.setState({
-          bioActive: true
-        });
-      } else {
-        _this.setState({
-          nameDisplacement: 0
-        });
-      }
-    });
+    };
     return _this;
   } //whenever the state changes, change the threejs J to the new hue
 
@@ -144,7 +90,6 @@ var App = /*#__PURE__*/function (_React$Component) {
       var fullContainerColor = "hsl(" + this.state.hue + ",55%,3%)";
       var canvasContainerColor = "hsl(" + this.state.hue + ",5%,13%)";
       var tintedTextColor = "hsl(" + this.state.hue + ",30%,79%)";
-      var letterColor = "hsl(" + this.state.hue + ",80%,40%)";
       var footerColor1 = "hsla(" + this.state.hue + ",60%,50%,.6)";
       var footerColor2 = "hsla(" + this.state.hue + ",60%,50%,1)";
       return /*#__PURE__*/_react["default"].createElement("div", {
@@ -156,29 +101,11 @@ var App = /*#__PURE__*/function (_React$Component) {
         id: "canvasContainer"
       }), /*#__PURE__*/_react["default"].createElement("div", {
         id: "bio"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "hoverName",
-        style: {
-          top: this.state.nameDisplacement - 80
-        }
-      }, /*#__PURE__*/_react["default"].createElement("span", null, "Julian George"), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "sliderContainer"
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "colorSlider",
-        onMouseDown: this.handleClick
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "sliderDot",
-        style: {
-          left: (this.state.hue - startingHue) / 2 - 20
-        }
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "dotColor",
-        style: {
-          backgroundColor: letterColor
-        }
-      }))), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "sliderLabel"
-      }, "change color"))), /*#__PURE__*/_react["default"].createElement(_Bio["default"], {
+      }, /*#__PURE__*/_react["default"].createElement(_BioHeader["default"], {
+        parent: this,
+        hue: this.state.hue,
+        startingHue: startingHue
+      }), /*#__PURE__*/_react["default"].createElement(_Bio["default"], {
         hue: this.state.hue,
         active: this.state.bioActive
       })), /*#__PURE__*/_react["default"].createElement("div", {

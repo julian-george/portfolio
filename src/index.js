@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import Fade from '@material-ui/core/Fade';
-import Collapse from '@material-ui/core/Collapse';
-import { gsap} from "gsap";
 
 import Bio from "./Bio.js"
+import BioHeader from "./BioHeader.js"
 
 let screen = {width:1200,height:900,aspect:1400/900};
 //this variable defines what the hue at the left of the color slider is
@@ -26,43 +24,7 @@ Goals:
 class App extends React.Component {
     constructor(props){
         super(props)
-        //function for the color slider, says that the slider is active when its clicked, setting base hue and position to be compared with later
-        this.handleClick = (event)=>{
-            this.setState({sliderActive:true,baseHue:this.state.hue,basePos:event.clientX})
-        }
-        this.state={
-            hue:startingHue,
-            baseHue:startingHue,
-            basePos:0,
-            nameDisplacement:0,
-            sliderActive:false,
-            bioActive:false}
-        // adds an event listener for the color slider whenever the mouse moves
-        document.addEventListener('mousemove',(e)=>{
-            // if the slider is active, change the hue (and therefore the slider position) accordingly
-            if (this.state.sliderActive){
-                let futureHue = this.state.baseHue+(e.clientX-this.state.basePos)*2
-                if (futureHue>360+startingHue) futureHue=360+startingHue
-                else if (futureHue<startingHue) futureHue=startingHue
-                this.setState({hue:futureHue})
-            }
-        })
-        // event listener for ending the slider edits
-        document.addEventListener('mouseup',(e)=>{
-            if (this.state.sliderActive) this.setState({sliderActive:false,baseHue:this.state.hue})
-        })
-        // event slider to trigger the bio fadein and to move the name and slider down (will change moving down animation to make more smooth)
-        document.addEventListener('scroll',(e)=>{
-            // screen.height/3 is a somewhat arbitrary number but it was a nice place to start the transition
-             if (window.scrollY>screen.height/3) {
-                 // this.state.nameDisplacement is vertical displacement of name, its 80 by default to put it in the threejs canvas
-                 this.setState({nameDisplacement:Math.min(window.scrollY-screen.height/3,80)})
-                 if (!this.state.bioActive&this.state.nameDisplacement==80) this.setState({bioActive:true})
-             }
-            else {
-                this.setState({nameDisplacement:0})
-            }
-        })
+        this.state={ hue:startingHue, bioActive:false }
     }
     //whenever the state changes, change the threejs J to the new hue
     componentDidUpdate(){
@@ -73,7 +35,6 @@ class App extends React.Component {
         let fullContainerColor="hsl("+this.state.hue+",55%,3%)"
         let canvasContainerColor="hsl("+this.state.hue+",5%,13%)"
         let tintedTextColor="hsl("+this.state.hue+",30%,79%)"
-        let letterColor="hsl("+this.state.hue+",80%,40%)"
         let footerColor1="hsla("+this.state.hue+",60%,50%,.6)"
         let footerColor2="hsla("+this.state.hue+",60%,50%,1)"
         
@@ -82,17 +43,7 @@ class App extends React.Component {
                 <div id="canvasContainer">
                 </div>
                 <div id = "bio">
-                    <div id ="hoverName" style={{top:this.state.nameDisplacement-80}}>
-                        <span>Julian George</span> 
-                        <div id ="sliderContainer">
-                            <div id ="colorSlider" onMouseDown={this.handleClick}>
-                                <div id="sliderDot" style={{left:(this.state.hue-startingHue)/2-20}}>
-                                    <div id="dotColor" style={{backgroundColor:letterColor}}></div>
-                                </div>
-                            </div>
-                            <div id ="sliderLabel">change color</div>
-                        </div>
-                    </div>
+                    < BioHeader parent = {this} hue = {this.state.hue} startingHue={startingHue}/>
                     < Bio hue={this.state.hue} active={this.state.bioActive}/>
                 </div>
                 <div id="footer" style={{background: "linear-gradient(315deg, "+footerColor1+"0%, "+footerColor2+"60%)",color:fullContainerColor }}>

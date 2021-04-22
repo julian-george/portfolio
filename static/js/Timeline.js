@@ -9,8 +9,6 @@ exports["default"] = Timeline;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _reactSpring = require("react-spring");
 
 var _Fade = _interopRequireDefault(require("@material-ui/core/Fade"));
