@@ -38,9 +38,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var screen = {
   width: 1200,
-  height: 900,
-  aspect: 1400 / 900
-}; //this variable defines what the hue at the left of the color slider is
+  height: window.innerHeight - 88
+};
+screen.aspect = screen.width / screen.height; //this variable defines what the hue at the left of the color slider is
 
 var startingHue = 34;
 /* 
@@ -51,12 +51,11 @@ Goals:
 */
 
 /* TODO:
-- Add links to visit project sites
 - Add outline to J
-- Divide up this file by component
 - Fix timeline by restyling everything
 - Finalize colors
 - Create day mode?
+- Project page with Django db serverside loading
 */
 
 var App = /*#__PURE__*/function (_React$Component) {
@@ -98,7 +97,10 @@ var App = /*#__PURE__*/function (_React$Component) {
           backgroundColor: fullContainerColor
         }
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "canvasContainer"
+        id: "canvasContainer",
+        style: {
+          height: screen.height
+        }
       }), /*#__PURE__*/_react["default"].createElement("div", {
         id: "bio"
       }, /*#__PURE__*/_react["default"].createElement(_BioHeader["default"], {

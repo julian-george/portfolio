@@ -116,6 +116,7 @@ class Project extends React.Component {
                         left:this.props.disp,
                         backgroundColor:((this.isCurrent) ? ((this.state.hovering) ? "hsl("+this.props.hue+",95%,25%)":"hsl("+this.props.hue+",75%,40%)") : "white")}
                 }>
+
                 <div id="projectHead" 
                     onMouseEnter={()=>{this.setState({hovering:true})}} 
                     onMouseLeave={()=>{this.setState({hovering:false})}}
@@ -129,7 +130,7 @@ class Project extends React.Component {
                     onClick={()=>{this.toggleInfo()}} >
                     {(!this.isCurrent) ? <img src={"static/screenshots/"+this.props.project.name+"thumbnail.png"} style={{transform:"scale(1."+((this.state.hovering)? 2 : 0)+")"}} /> : ""}
                 </div>
-                <ProjectInfo project={this.props.project} hue={this.props.hue} active={this.state.infoActive} toggleFunc={this.props.toggleFunc}/>
+                <ProjectInfo project={this.props.project} hue={this.props.hue} active={this.state.infoActive} parent={this}/>
             </div>
         )
     }
@@ -145,6 +146,9 @@ class ProjectInfo extends React.Component {
             <Fade in ={this.props.active}>
 
                     <div id="projectInfo" data-content={"red"}>
+                        <div id ="closeProject" onClick={()=>{this.props.parent.toggleInfo()}}>
+                            <span>🗙</span>
+                        </div>
                         <div id="projectInfoHead">
                             <div id ="projectInfoTitle">
                                 {(this.props.project.hasOwnProperty("link")) ? <a href={this.props.project.link} target="_blank">{this.props.project.title}</a> : (this.props.project.title)}

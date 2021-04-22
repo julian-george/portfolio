@@ -76,8 +76,8 @@ function BioHeader(props) {
 
   (0, _react.useEffect)(function () {
     document.addEventListener('scroll', function (e) {
-      // screen.height/3 is a somewhat arbitrary number but it was a nice place to start the transition
-      if (window.scrollY > screen.height / 3) {
+      // once the scroll passes the bio info
+      if (window.scrollY > 120) {
         toggleFocus(true);
         props.parent.setState({
           bioActive: true

@@ -23,8 +23,8 @@ export default function BioHeader(props) {
     //adds event listener to move header upon scrolling past certain point, only on initialization
     useEffect(()=>{
         document.addEventListener('scroll',(e)=>{
-            // screen.height/3 is a somewhat arbitrary number but it was a nice place to start the transition
-            if (window.scrollY>screen.height/3) {
+            // once the scroll passes the bio info
+            if (window.scrollY>120) {
                 toggleFocus(true)
                 props.parent.setState({bioActive:true})
             }

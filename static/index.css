@@ -13,13 +13,12 @@ a {
 }
 #fullContainer {
     width:100%;
-    height:2200px;
     padding:44px 0;
+    position:relative;
 }
 #canvasContainer {
     margin: 0 auto;
     width:1200px;
-    height:900px;
     cursor:grab;
     position:relative;
     z-index:2
@@ -46,7 +45,6 @@ a {
 #bio {
     margin: 0 auto;
     width:1200px;
-    height:900px;
     position:relative;
 }
 #sliderContainer {
@@ -100,6 +98,7 @@ a {
 }
 #bioContainer {
     width:1188px;
+    height:1200px;
     margin:0 auto;
     position:relative;
 }
@@ -302,7 +301,7 @@ a {
     top:180px;
     background-color:white;
     border-radius:4px;
-    padding:16px;
+    padding:24px 24px;
 }
 #projectInfo::before{
 	content: ' ';
@@ -329,8 +328,8 @@ a {
     height:24px;
     width:24px;
     position:absolute;
-    right:20px;
-    top:22px;
+    right:28px;
+    top:30px;
 }
 #projectInfoBody {
     padding:6px 6px;
@@ -343,11 +342,18 @@ a {
     margin: 24px 6px;
     width: 308px;
 }
+#closeProject {
+    position:absolute;
+    top:4px;
+    right:4px;
+    font-size:16px;
+    cursor:pointer;
+}
 #footer {
     width:100%;
     height:44px;
-    position:relative;
-    top:444px;
+    position:absolute;
+    bottom:0;
     font-family:Helvetica;
     font-size:12px;
     text-align:center;

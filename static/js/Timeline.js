@@ -283,7 +283,7 @@ var Project = /*#__PURE__*/function (_React$Component) {
         project: this.props.project,
         hue: this.props.hue,
         active: this.state.infoActive,
-        toggleFunc: this.props.toggleFunc
+        parent: this
       }));
     }
   }]);
@@ -306,6 +306,8 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
   _createClass(ProjectInfo, [{
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // rendering the inherited project info
       return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
         "in": this.props.active
@@ -313,6 +315,11 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
         id: "projectInfo",
         "data-content": "red"
       }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "closeProject",
+        onClick: function onClick() {
+          _this3.props.parent.toggleInfo();
+        }
+      }, /*#__PURE__*/_react["default"].createElement("span", null, "\uD83D\uDDD9")), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoHead"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoTitle"

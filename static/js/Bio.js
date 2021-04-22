@@ -97,7 +97,7 @@ var Bio = /*#__PURE__*/function (_React$Component) {
         src: "static/avatar.jpeg"
       })), /*#__PURE__*/_react["default"].createElement("div", {
         id: "personalinfo"
-      }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Dartmouth '24"), /*#__PURE__*/_react["default"].createElement("div", {
+      }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Jr. Full Stack Dev. at Magnuson Center"), /*#__PURE__*/_react["default"].createElement("div", {
         id: "socialrow"
       }, /*#__PURE__*/_react["default"].createElement("a", {
         href: "https://www.linkedin.com/in/julian-george-33b42a1b3/",

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import Bio from "./Bio.js"
 import BioHeader from "./BioHeader.js"
 
-let screen = {width:1200,height:900,aspect:1400/900};
+let screen = {width:1200,height:window.innerHeight-88};
+screen.aspect= screen.width/screen.height
 //this variable defines what the hue at the left of the color slider is
 const startingHue = 34
 /* 
@@ -14,12 +15,11 @@ Goals:
 3. Make good code so I can use this portfolio for a while
 */
 /* TODO:
-- Add links to visit project sites
 - Add outline to J
-- Divide up this file by component
 - Fix timeline by restyling everything
 - Finalize colors
 - Create day mode?
+- Project page with Django db serverside loading
 */
 class App extends React.Component {
     constructor(props){
@@ -40,7 +40,7 @@ class App extends React.Component {
         
         return (
             <div id = "fullContainer" style={{backgroundColor:fullContainerColor}}> 
-                <div id="canvasContainer">
+                <div id="canvasContainer" style={{height:screen.height}}>
                 </div>
                 <div id = "bio">
                     < BioHeader parent = {this} hue = {this.state.hue} startingHue={startingHue}/>

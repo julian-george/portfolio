@@ -45762,7 +45762,7 @@ var Bio = /*#__PURE__*/function (_React$Component) {
         src: "static/avatar.jpeg"
       })), /*#__PURE__*/_react["default"].createElement("div", {
         id: "personalinfo"
-      }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Dartmouth '24"), /*#__PURE__*/_react["default"].createElement("div", {
+      }, /*#__PURE__*/_react["default"].createElement("div", null, "julian@juliangeorge.net"), /*#__PURE__*/_react["default"].createElement("div", null, "Cherry Hill, NJ"), /*#__PURE__*/_react["default"].createElement("div", null, "Jr. Full Stack Dev. at Magnuson Center"), /*#__PURE__*/_react["default"].createElement("div", {
         id: "socialrow"
       }, /*#__PURE__*/_react["default"].createElement("a", {
         href: "https://www.linkedin.com/in/julian-george-33b42a1b3/",
@@ -45915,8 +45915,8 @@ function BioHeader(props) {
 
   (0, _react.useEffect)(function () {
     document.addEventListener('scroll', function (e) {
-      // screen.height/3 is a somewhat arbitrary number but it was a nice place to start the transition
-      if (window.scrollY > screen.height / 3) {
+      // once the scroll passes the bio info
+      if (window.scrollY > 120) {
         toggleFocus(true);
         props.parent.setState({
           bioActive: true
@@ -46262,7 +46262,7 @@ var Project = /*#__PURE__*/function (_React$Component) {
         project: this.props.project,
         hue: this.props.hue,
         active: this.state.infoActive,
-        toggleFunc: this.props.toggleFunc
+        parent: this
       }));
     }
   }]);
@@ -46285,6 +46285,8 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
   _createClass(ProjectInfo, [{
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // rendering the inherited project info
       return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
         "in": this.props.active
@@ -46292,6 +46294,11 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
         id: "projectInfo",
         "data-content": "red"
       }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "closeProject",
+        onClick: function onClick() {
+          _this3.props.parent.toggleInfo();
+        }
+      }, /*#__PURE__*/_react["default"].createElement("span", null, "\uD83D\uDDD9")), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoHead"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoTitle"
@@ -46360,9 +46367,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var screen = {
   width: 1200,
-  height: 900,
-  aspect: 1400 / 900
-}; //this variable defines what the hue at the left of the color slider is
+  height: window.innerHeight - 88
+};
+screen.aspect = screen.width / screen.height; //this variable defines what the hue at the left of the color slider is
 
 var startingHue = 34;
 /* 
@@ -46373,12 +46380,11 @@ Goals:
 */
 
 /* TODO:
-- Add links to visit project sites
 - Add outline to J
-- Divide up this file by component
 - Fix timeline by restyling everything
 - Finalize colors
 - Create day mode?
+- Project page with Django db serverside loading
 */
 
 var App = /*#__PURE__*/function (_React$Component) {
@@ -46420,7 +46426,10 @@ var App = /*#__PURE__*/function (_React$Component) {
           backgroundColor: fullContainerColor
         }
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "canvasContainer"
+        id: "canvasContainer",
+        style: {
+          height: screen.height
+        }
       }), /*#__PURE__*/_react["default"].createElement("div", {
         id: "bio"
       }, /*#__PURE__*/_react["default"].createElement(_BioHeader["default"], {
