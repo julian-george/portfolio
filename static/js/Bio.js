@@ -113,7 +113,7 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "static/logos/twitter.png"
       })), /*#__PURE__*/_react["default"].createElement("a", {
-        href: "https://github.com/FudgeDaMuffin",
+        href: "https://github.com/julian-george",
         target: "_blank"
       }, /*#__PURE__*/_react["default"].createElement("img", {
         src: "static/logos/github.png",

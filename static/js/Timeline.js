@@ -75,44 +75,7 @@ function Timeline(props) {
       disp: props.timeline.bubbleDisp * index,
       project: p
     });
-  }); // array of projects that's converted to components to be used in timeline
-  // let projects=[{
-  //         name:"current",
-  //         title:"What I'm Working On Now",
-  //         description:"I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
-  //         banner:false,
-  //     },{
-  //         name:"portfolio",
-  //         title:"Portfolio",
-  //         date:"February 2021",
-  //         technologies:["HTML/CSS","Javascript","React","Threejs","Figma","react-spring"],
-  //         description:"My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled.",
-  //         github:"https://github.com/FudgeDaMuffin/portfolio"
-  //     }, {
-  //         name:"academicchallenge",
-  //         title:"Academic Challenge",
-  //         date:"January-February 2021",
-  //         technologies:["HTML/CSS","Javascript","Nodejs","MongoDB","React","Socket.io","Bash"],
-  //         description:"This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills.",
-  //         github:"https://github.com/FudgeDaMuffin/academic-challenge",
-  //         link:"https://academic-challenge.com"
-  //     }, {
-  //         name:"idsite",
-  //         title:"Dartmouth ID Maker",
-  //         date:"October 2020",
-  //         technologies:["HTML/CSS","Javascript","jQuery"],
-  //         description:"This project allows users to customize a Dartmouth ID. As my first personal project of college, it refreshed me on web development skills. It was also a good exercise in implementing pre-made designs, as I used HTML and CSS to replicate a handheld Dartmouth ID almost perfectly.",
-  //         github:"https://github.com/FudgeDaMuffin/dartmouth-id-creator",
-  //         link:"idsite/index.html"
-  //     }, {
-  //         name:"highschool",
-  //         title:"High School Projects",
-  //         date:"2017-2020",
-  //         technologies:["HTML/CSS","Javascript","jQuery","Nodejs","MongoDB","SQL","Python"],
-  //         description: "In high school, I worked on a variety of projects, from apps for my Computer Science Club, to sites for various school organizations, to random passion projects. My code was never very organized or efficient, and I only used HTML and jQuery, with some occasional Nodejs. Still, these projects let me develop my current skills, and although I may not be very proud of them today, I've learned from the mistakes I made then in order to become the dev I am now.",
-  //         banner:false,
-  //     }]
-  // these two determine how much to move the timeline with each click, and the maximum amount of movement
+  }); // these two determine how much to move the timeline with each click, and the maximum amount of movement
 
   var moveAmount = props.timeline.bubbleSize + props.timeline.bubbleDisp;
   var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 60); // setting initial line displacement
@@ -146,6 +109,7 @@ function Timeline(props) {
       toggleRight(false);
       toggleLeft(true);
     } else {
+      if (lineDisplacement == 0) newDisp -= props.timeline.bubbleDisp;
       toggleLeft(true);
       toggleRight(true);
     }

@@ -34,6 +34,8 @@ export default function Timeline (props) {
             toggleLeft(true)
         } 
         else { 
+            // makes it so shown projects don't clip outside of container
+            if (lineDisplacement==0) newDisp-=props.timeline.bubbleDisp
             toggleLeft(true)
             toggleRight(true)
         }
