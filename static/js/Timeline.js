@@ -43,63 +43,79 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // I usually use classbased components because I like the OOP feel, but I needed to use hooks for the react-spring animations here, so I used a function based component
 function Timeline(props) {
-  // array of projects that's converted to components to be used in timeline
-  var projects = [{
+  var currentProj = {
     name: "current",
     title: "What I'm Working On Now",
-    description: "I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
+    summary: "I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
     banner: false
-  }, {
-    name: "portfolio",
-    title: "Portfolio",
-    date: "February 2021",
-    technologies: ["HTML/CSS", "Javascript", "React", "Threejs", "Figma", "react-spring"],
-    description: "My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled.",
-    github: "https://github.com/FudgeDaMuffin/portfolio"
-  }, {
-    name: "academicchallenge",
-    title: "Academic Challenge",
-    date: "January-February 2021",
-    technologies: ["HTML/CSS", "Javascript", "Nodejs", "MongoDB", "React", "Socket.io", "Bash"],
-    description: "This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills.",
-    github: "https://github.com/FudgeDaMuffin/academic-challenge",
-    link: "https://academic-challenge.com"
-  }, {
-    name: "idsite",
-    title: "Dartmouth ID Maker",
-    date: "October 2020",
-    technologies: ["HTML/CSS", "Javascript", "jQuery"],
-    description: "This project allows users to customize a Dartmouth ID. As my first personal project of college, it refreshed me on web development skills. It was also a good exercise in implementing pre-made designs, as I used HTML and CSS to replicate a handheld Dartmouth ID almost perfectly.",
-    github: "https://github.com/FudgeDaMuffin/dartmouth-id-creator",
-    link: "idsite/index.html"
-  }, {
-    name: "highschool",
-    title: "High School Projects",
-    date: "2017-2020",
-    technologies: ["HTML/CSS", "Javascript", "jQuery", "Nodejs", "MongoDB", "SQL", "Python"],
-    description: "In high school, I worked on a variety of projects, from apps for my Computer Science Club, to sites for various school organizations, to random passion projects. My code was never very organized or efficient, and I only used HTML and jQuery, with some occasional Nodejs. Still, these projects let me develop my current skills, and although I may not be very proud of them today, I've learned from the mistakes I made then in order to become the dev I am now.",
-    banner: false
-  }].map(function (p, index) {
+  };
+  var projects = [currentProj].concat(_toConsumableArray(loaded_data.projects));
+  projects = projects.map(function (p, index) {
     return /*#__PURE__*/_react["default"].createElement(Project, {
       key: index,
       hue: props.hue,
       disp: props.timeline.bubbleDisp * index,
       project: p
     });
-  }); // these two determine how much to move the timeline with each click, and the maximum amount of movement
+  }); // array of projects that's converted to components to be used in timeline
+  // let projects=[{
+  //         name:"current",
+  //         title:"What I'm Working On Now",
+  //         description:"I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
+  //         banner:false,
+  //     },{
+  //         name:"portfolio",
+  //         title:"Portfolio",
+  //         date:"February 2021",
+  //         technologies:["HTML/CSS","Javascript","React","Threejs","Figma","react-spring"],
+  //         description:"My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled.",
+  //         github:"https://github.com/FudgeDaMuffin/portfolio"
+  //     }, {
+  //         name:"academicchallenge",
+  //         title:"Academic Challenge",
+  //         date:"January-February 2021",
+  //         technologies:["HTML/CSS","Javascript","Nodejs","MongoDB","React","Socket.io","Bash"],
+  //         description:"This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills.",
+  //         github:"https://github.com/FudgeDaMuffin/academic-challenge",
+  //         link:"https://academic-challenge.com"
+  //     }, {
+  //         name:"idsite",
+  //         title:"Dartmouth ID Maker",
+  //         date:"October 2020",
+  //         technologies:["HTML/CSS","Javascript","jQuery"],
+  //         description:"This project allows users to customize a Dartmouth ID. As my first personal project of college, it refreshed me on web development skills. It was also a good exercise in implementing pre-made designs, as I used HTML and CSS to replicate a handheld Dartmouth ID almost perfectly.",
+  //         github:"https://github.com/FudgeDaMuffin/dartmouth-id-creator",
+  //         link:"idsite/index.html"
+  //     }, {
+  //         name:"highschool",
+  //         title:"High School Projects",
+  //         date:"2017-2020",
+  //         technologies:["HTML/CSS","Javascript","jQuery","Nodejs","MongoDB","SQL","Python"],
+  //         description: "In high school, I worked on a variety of projects, from apps for my Computer Science Club, to sites for various school organizations, to random passion projects. My code was never very organized or efficient, and I only used HTML and jQuery, with some occasional Nodejs. Still, these projects let me develop my current skills, and although I may not be very proud of them today, I've learned from the mistakes I made then in order to become the dev I am now.",
+  //         banner:false,
+  //     }]
+  // these two determine how much to move the timeline with each click, and the maximum amount of movement
 
   var moveAmount = props.timeline.bubbleSize + props.timeline.bubbleDisp;
-  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 40); // setting initial line displacement
+  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 60); // setting initial line displacement
 
   var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -259,7 +275,7 @@ var Project = /*#__PURE__*/function (_React$Component) {
         id: "projectTitle"
       }, this.props.project.title), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectDate"
-      }, this.props.project.hasOwnProperty("date") ? this.props.project.date : "")), /*#__PURE__*/_react["default"].createElement("div", {
+      }, this.props.project.hasOwnProperty("time") ? this.props.project.time : "")), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectThumbnail",
         onMouseEnter: function onMouseEnter() {
           _this2.setState({
@@ -275,7 +291,7 @@ var Project = /*#__PURE__*/function (_React$Component) {
           _this2.toggleInfo();
         }
       }, !this.isCurrent ? /*#__PURE__*/_react["default"].createElement("img", {
-        src: "static/screenshots/" + this.props.project.name + "thumbnail.png",
+        src: this.props.project.icon,
         style: {
           transform: "scale(1." + (this.state.hovering ? 2 : 0) + ")"
         }
@@ -336,11 +352,11 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
         src: "static/logos/github-black.png"
       })) : "")), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoBody"
-      }, this.props.project.description), /*#__PURE__*/_react["default"].createElement("div", {
+      }, this.props.project.summary), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoBanner"
-      }, !this.props.project.hasOwnProperty("banner") ? /*#__PURE__*/_react["default"].createElement("img", {
+      }, this.props.project.banner != "" ? /*#__PURE__*/_react["default"].createElement("img", {
         id: "projectBanner",
-        src: "static/screenshots/" + this.props.project.name + "banner.png"
+        src: this.props.project.banner
       }) : "")));
     }
   }]);

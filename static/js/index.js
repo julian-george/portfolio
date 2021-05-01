@@ -73,6 +73,15 @@ var App = /*#__PURE__*/function (_React$Component) {
       hue: startingHue,
       bioActive: false
     };
+
+    _this.changeHue = function (component) {
+      return function (newHue) {
+        component.setState({
+          hue: newHue
+        });
+      };
+    };
+
     return _this;
   } //whenever the state changes, change the threejs J to the new hue
 
@@ -177,4 +186,7 @@ var animate = function animate() {
   letterJ.rotation.y += 0.005;
   renderer.render(scene, camera);
   controls.update();
-};
+}; // window.addEventListener('resize', ()=>{
+//     renderer.setSize(screen.width,screen.height);
+//     camera.aspect=screen.aspect;
+// });

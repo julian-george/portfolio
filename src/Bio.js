@@ -6,7 +6,7 @@ import Timeline from "./Timeline.js"
 class Bio extends React.Component {
     constructor(props){
         super(props)
-        this.skills=["HTML","CSS","Javascript","Nodejs","MongoDB","React","Java","Figma"]
+        this.skills=loaded_data.skills.sort((a, b)=> a.name.localeCompare(b.name))
         // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
         this.timeline = {
             bubbleSize:160,
@@ -16,7 +16,7 @@ class Bio extends React.Component {
     }
     render(){
         // converting skill array into < Skill /> components
-        let skillComponents=this.skills.map((s,index)=>(<Skill hue={this.props.hue} name={s} key={index}/>))
+        let skillComponents=this.skills.map((s,index)=>(<Skill hue={this.props.hue} name={s.name} icon={s.icon} key={index}/>))
         let saturatedColor="hsl("+this.props.hue+",80%,40%)"
         let avatarColor="hsl("+this.props.hue+",85%,30%)"
                                                         
@@ -55,7 +55,7 @@ class Bio extends React.Component {
                     <div id = "timelineContainer">
                         <div id ="timelinetitle">My Projects</div>
                         <div id ="timelinebody">
-                            < Timeline hue={this.props.hue} timeline={this.timeline} /> 
+                            < Timeline hue={this.props.hue} timeline={this.timeline}  /> 
                         </div>
                         
                     </div>
@@ -72,7 +72,7 @@ class Skill extends React.Component {
         let bgColor="hsl("+this.props.hue+",10%,15%)"
         return (
             <div className="skill" style={{backgroundColor:bgColor}}>
-                <img src={"static/logos/"+this.props.name.toLowerCase()+".png"}></img>
+                <img src={this.props.icon}></img>
                 <span>{this.props.name}</span>
             </div>
         )

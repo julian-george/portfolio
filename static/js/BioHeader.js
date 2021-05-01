@@ -9,21 +9,15 @@ exports["default"] = BioHeader;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _reactSpring = require("react-spring");
+
+var _Slider = _interopRequireDefault(require("./Slider"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -43,97 +37,30 @@ function BioHeader(props) {
       bioFocus = _useState2[0],
       toggleFocus = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
-    hue: props.hue,
-    baseHue: props.hue,
-    basePos: 0,
-    nameDisplacement: 0,
-    sliderActive: false
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      sliderState = _useState4[0],
-      updateSlider = _useState4[1];
-
-  var letterColor = "hsl(" + sliderState.hue + ",80%,40%)";
   var dispSpring = (0, _reactSpring.useSpring)({
     top: bioFocus ? "0" : "-80px"
   }, {
     duration: 500
   });
 
-  var handleClick = function handleClick(event) {
-    var updatedVals = _objectSpread(_objectSpread({}, sliderState), {}, {
-      sliderActive: true,
-      baseHue: sliderState.hue,
-      basePos: event.clientX
-    });
-
-    updateSlider({
-      updatedVals: updatedVals
-    });
+  var updateFocus = function updateFocus(e) {
+    if (window.scrollY > 120) {
+      toggleFocus(true);
+      props.parent.setState({
+        bioActive: true
+      });
+    } else toggleFocus(false);
   }; //adds event listener to move header upon scrolling past certain point, only on initialization
 
 
   (0, _react.useEffect)(function () {
-    document.addEventListener('scroll', function (e) {
-      // once the scroll passes the bio info
-      if (window.scrollY > 120) {
-        toggleFocus(true);
-        props.parent.setState({
-          bioActive: true
-        });
-      } else toggleFocus(false);
-    });
-    document.addEventListener('mousemove', function (e) {
-      console.log(sliderState.hue); // if the slider is active, change the hue (and therefore the slider position) accordingly
-
-      if (sliderState.sliderActive) {
-        console.log(sliderState);
-        var futureHue = sliderState.baseHue + (e.clientX - sliderState.basePos) * 2;
-        console.log("f " + futureHue);
-        if (futureHue > 360 + props.startingHue) futureHue = 360 + props.startingHue;else if (futureHue < props.startingHue) futureHue = props.startingHue;
-        console.log("f2 " + futureHue);
-
-        var updatedVals = _objectSpread(_objectSpread({}, sliderState), {}, {
-          hue: futureHue
-        });
-
-        updateSlider(updatedVals);
-      }
-    });
-    document.addEventListener('mouseup', function (e) {
-      console.log("mouseup");
-
-      if (sliderState.sliderActive) {
-        var updatedVals = _objectSpread(_objectSpread({}, sliderState), {}, {
-          sliderActive: false,
-          baseHue: sliderState.hue
-        });
-
-        updateSlider(updatedVals);
-      }
-    });
+    document.addEventListener('scroll', updateFocus);
   }, []);
-  console.log(sliderState.hue + " " + props.startingHue);
   return /*#__PURE__*/_react["default"].createElement(_reactSpring.animated.div, {
     id: "hoverName",
     style: dispSpring
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "Julian George"), /*#__PURE__*/_react["default"].createElement("div", {
-    id: "sliderContainer"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    id: "colorSlider",
-    onMouseDown: handleClick
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    id: "sliderDot",
-    style: {
-      left: (sliderState.hue - props.startingHue) / 2 - 20
-    }
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    id: "dotColor",
-    style: {
-      backgroundColor: letterColor
-    }
-  }))), /*#__PURE__*/_react["default"].createElement("div", {
-    id: "sliderLabel"
-  }, "change color")));
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "Julian George"), /*#__PURE__*/_react["default"].createElement(_Slider["default"], {
+    parent: props.parent,
+    startingHue: props.startingHue
+  }));
 }

@@ -1,0 +1,158 @@
+:root {
+    --projContHeight: 300px;
+    --projectHeight: 160px
+}
+#timelineContainer {
+    width:1188px;
+    margin:0 auto;
+    position:relative;
+}
+#timelinetitle {
+    font-family:Helvetica;
+    font-size:36px;
+    font-weight:600;
+    color:white;
+    margin-bottom:40px
+}
+#projectlist {
+    width:100%;
+    height:var(--projContHeight);
+    position:relative;
+    display:inline-flex
+}
+#timeline {
+    background-color:white;
+    height:18px;
+    position:absolute;
+    width:1046px;
+    left:71px;
+    top:calc((var(--projectHeight) - 18px) / 2)
+}
+#projectsContainer {
+    position:relative;
+    display:flex
+}
+#project {
+    height:var(--projectHeight);
+    width:var(--projectHeight);
+    border-radius:50%;
+    z-index:3;
+    position:relative;
+    transition:all .15s
+}
+.timelineNav {
+    width:44px;
+    position:relative;
+    z-index:4;
+}
+.timelineNav>svg {
+    position:relative;
+    top: calc((var(--projectHeight) - 60px) / 2)
+}
+#navLeft {
+    left:4px;
+}
+#navRight {
+    right:4px;
+}
+/* this element gave me a ton of trouble and messed up my plans for the timeline with its baffling vertical scroll. I added the bottom padding to fix the scroll wheel that appeared otherwise */
+#innerProjects{
+    overflow-x:hidden;
+    overflow-y:visible;
+    width:1050px;
+    margin:0 auto;
+    height:100%;
+    display:flex;
+    padding-bottom:425px;
+}
+#projectHead {
+    width:70%;
+    left:15%;
+    top:36px;
+    text-align:center;
+    font-family:Helvetica;
+    z-index:2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color:white;
+    cursor:pointer;
+}
+#projectTitle {
+    font-size:18px;
+    font-weight:bold;
+    
+}
+#projectDate{
+    font-size:12px;
+}
+#projectThumbnail {
+    height:140px;
+    width:140px;
+    border-radius:50%;
+    position:absolute;
+    left:10px;
+    top:10px;
+    overflow:hidden;
+    cursor:pointer;
+}
+#projectThumbnail > img {
+    height:100%;
+    width:100%;
+    filter:brightness(.75) blur(1px);
+    transition:all .5s
+}
+#projectInfo {
+    width:200%;
+    position:relative;
+    top:180px;
+    background-color:white;
+    border-radius:4px;
+    padding:24px 24px;
+}
+#projectInfo::before{
+	content: ' ';
+	position: absolute;
+	left:68px;
+    top:-24px;
+	border: 12px solid;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	border-right-color: transparent;
+    border-bottom-color: white;
+}
+#projectInfoHead {
+    padding:4px 6px;
+    display:inline-flex
+}
+#projectInfoTitle {
+    font-family:Helvetica;
+    color:black;
+    font-size:24px;
+    font-weight:bold;
+}
+#projectGit {
+    height:24px;
+    width:24px;
+    position:absolute;
+    right:28px;
+    top:30px;
+}
+#projectInfoBody {
+    padding:6px 6px;
+    font-family:Helvetica;
+    font-size:14px;
+    line-height:18px;
+}
+#projectBanner {
+    position:relative;
+    margin: 24px 6px;
+    width: 308px;
+}
+#closeProject {
+    position:absolute;
+    top:4px;
+    right:4px;
+    font-size:16px;
+    cursor:pointer;
+}

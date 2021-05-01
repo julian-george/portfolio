@@ -51,7 +51,9 @@ var Bio = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Bio);
 
     _this = _super.call(this, props);
-    _this.skills = ["HTML", "CSS", "Javascript", "Nodejs", "MongoDB", "React", "Java", "Figma"]; // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
+    _this.skills = loaded_data.skills.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    }); // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
 
     _this.timeline = {
       bubbleSize: 160,
@@ -70,7 +72,8 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       var skillComponents = this.skills.map(function (s, index) {
         return /*#__PURE__*/_react["default"].createElement(Skill, {
           hue: _this2.props.hue,
-          name: s,
+          name: s.name,
+          icon: s.icon,
           key: index
         });
       });
@@ -161,7 +164,7 @@ var Skill = /*#__PURE__*/function (_React$Component2) {
           backgroundColor: bgColor
         }
       }, /*#__PURE__*/_react["default"].createElement("img", {
-        src: "static/logos/" + this.props.name.toLowerCase() + ".png"
+        src: this.props.icon
       }), /*#__PURE__*/_react["default"].createElement("span", null, this.props.name));
     }
   }]);

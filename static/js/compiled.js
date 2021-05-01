@@ -45716,7 +45716,9 @@ var Bio = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Bio);
 
     _this = _super.call(this, props);
-    _this.skills = ["HTML", "CSS", "Javascript", "Nodejs", "MongoDB", "React", "Java", "Figma"]; // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
+    _this.skills = loaded_data.skills.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    }); // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
 
     _this.timeline = {
       bubbleSize: 160,
@@ -45735,7 +45737,8 @@ var Bio = /*#__PURE__*/function (_React$Component) {
       var skillComponents = this.skills.map(function (s, index) {
         return /*#__PURE__*/_react["default"].createElement(Skill, {
           hue: _this2.props.hue,
-          name: s,
+          name: s.name,
+          icon: s.icon,
           key: index
         });
       });
@@ -45826,7 +45829,7 @@ var Skill = /*#__PURE__*/function (_React$Component2) {
           backgroundColor: bgColor
         }
       }, /*#__PURE__*/_react["default"].createElement("img", {
-        src: "static/logos/" + this.props.name.toLowerCase() + ".png"
+        src: this.props.icon
       }), /*#__PURE__*/_react["default"].createElement("span", null, this.props.name));
     }
   }]);
@@ -45836,7 +45839,7 @@ var Skill = /*#__PURE__*/function (_React$Component2) {
 
 var _default = Bio;
 exports["default"] = _default;
-},{"./Timeline.js":170,"@material-ui/core/Fade":24,"react":160}],169:[function(require,module,exports){
+},{"./Timeline.js":171,"@material-ui/core/Fade":24,"react":160}],169:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -45848,21 +45851,15 @@ exports["default"] = BioHeader;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _reactSpring = require("react-spring");
+
+var _Slider = _interopRequireDefault(require("./Slider"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -45882,101 +45879,151 @@ function BioHeader(props) {
       bioFocus = _useState2[0],
       toggleFocus = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
-    hue: props.hue,
-    baseHue: props.hue,
-    basePos: 0,
-    nameDisplacement: 0,
-    sliderActive: false
-  }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      sliderState = _useState4[0],
-      updateSlider = _useState4[1];
-
-  var letterColor = "hsl(" + sliderState.hue + ",80%,40%)";
   var dispSpring = (0, _reactSpring.useSpring)({
     top: bioFocus ? "0" : "-80px"
   }, {
     duration: 500
   });
 
-  var handleClick = function handleClick(event) {
-    var updatedVals = _objectSpread(_objectSpread({}, sliderState), {}, {
-      sliderActive: true,
-      baseHue: sliderState.hue,
-      basePos: event.clientX
-    });
-
-    updateSlider({
-      updatedVals: updatedVals
-    });
+  var updateFocus = function updateFocus(e) {
+    if (window.scrollY > 120) {
+      toggleFocus(true);
+      props.parent.setState({
+        bioActive: true
+      });
+    } else toggleFocus(false);
   }; //adds event listener to move header upon scrolling past certain point, only on initialization
 
 
   (0, _react.useEffect)(function () {
-    document.addEventListener('scroll', function (e) {
-      // once the scroll passes the bio info
-      if (window.scrollY > 120) {
-        toggleFocus(true);
-        props.parent.setState({
-          bioActive: true
-        });
-      } else toggleFocus(false);
-    });
-    document.addEventListener('mousemove', function (e) {
-      console.log(sliderState.hue); // if the slider is active, change the hue (and therefore the slider position) accordingly
-
-      if (sliderState.sliderActive) {
-        console.log(sliderState);
-        var futureHue = sliderState.baseHue + (e.clientX - sliderState.basePos) * 2;
-        console.log("f " + futureHue);
-        if (futureHue > 360 + props.startingHue) futureHue = 360 + props.startingHue;else if (futureHue < props.startingHue) futureHue = props.startingHue;
-        console.log("f2 " + futureHue);
-
-        var updatedVals = _objectSpread(_objectSpread({}, sliderState), {}, {
-          hue: futureHue
-        });
-
-        updateSlider(updatedVals);
-      }
-    });
-    document.addEventListener('mouseup', function (e) {
-      console.log("mouseup");
-
-      if (sliderState.sliderActive) {
-        var updatedVals = _objectSpread(_objectSpread({}, sliderState), {}, {
-          sliderActive: false,
-          baseHue: sliderState.hue
-        });
-
-        updateSlider(updatedVals);
-      }
-    });
+    document.addEventListener('scroll', updateFocus);
   }, []);
-  console.log(sliderState.hue + " " + props.startingHue);
   return /*#__PURE__*/_react["default"].createElement(_reactSpring.animated.div, {
     id: "hoverName",
     style: dispSpring
-  }, /*#__PURE__*/_react["default"].createElement("span", null, "Julian George"), /*#__PURE__*/_react["default"].createElement("div", {
-    id: "sliderContainer"
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    id: "colorSlider",
-    onMouseDown: handleClick
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    id: "sliderDot",
-    style: {
-      left: (sliderState.hue - props.startingHue) / 2 - 20
-    }
-  }, /*#__PURE__*/_react["default"].createElement("div", {
-    id: "dotColor",
-    style: {
-      backgroundColor: letterColor
-    }
-  }))), /*#__PURE__*/_react["default"].createElement("div", {
-    id: "sliderLabel"
-  }, "change color")));
+  }, /*#__PURE__*/_react["default"].createElement("span", null, "Julian George"), /*#__PURE__*/_react["default"].createElement(_Slider["default"], {
+    parent: props.parent,
+    startingHue: props.startingHue
+  }));
 }
-},{"react":160,"react-dom":143,"react-spring":147}],170:[function(require,module,exports){
+},{"./Slider":170,"react":160,"react-spring":147}],170:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var Slider = /*#__PURE__*/function (_React$Component) {
+  _inherits(Slider, _React$Component);
+
+  var _super = _createSuper(Slider);
+
+  function Slider(props) {
+    var _this;
+
+    _classCallCheck(this, Slider);
+
+    _this = _super.call(this, props); //function for the color slider, says that the slider is active when its clicked, setting base hue and position to be compared with later
+
+    _this.handleClick = function (event) {
+      _this.setState({
+        sliderActive: true,
+        baseHue: _this.state.hue,
+        basePos: event.clientX
+      });
+    };
+
+    _this.state = {
+      hue: props.startingHue,
+      baseHue: props.startingHue,
+      basePos: 0,
+      sliderActive: false,
+      bioActive: false
+    }; // adds an event listener for the color slider whenever the mouse moves
+
+    document.addEventListener('mousemove', function (e) {
+      var startingHue = _this.props.startingHue; // if the slider is active, change the hue (and therefore the slider position) accordingly
+
+      if (_this.state.sliderActive) {
+        var futureHue = _this.state.baseHue + (e.clientX - _this.state.basePos) * 2;
+        if (futureHue > 360 + startingHue) futureHue = 360 + startingHue;else if (futureHue < startingHue) futureHue = startingHue;
+
+        _this.setState({
+          hue: futureHue
+        });
+
+        _this.props.parent.setState({
+          hue: futureHue
+        });
+      }
+    }); // event listener for ending the slider edits
+
+    document.addEventListener('mouseup', function (e) {
+      if (_this.state.sliderActive) _this.setState({
+        sliderActive: false,
+        baseHue: _this.state.hue
+      });
+    });
+    return _this;
+  }
+
+  _createClass(Slider, [{
+    key: "render",
+    value: function render() {
+      var letterColor = "hsl(" + this.state.hue + ",80%,40%)";
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        id: "sliderContainer"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "colorSlider",
+        onMouseDown: this.handleClick
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "sliderDot",
+        style: {
+          left: (this.state.hue - this.props.startingHue) / 2 - 20
+        }
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        id: "dotColor",
+        style: {
+          backgroundColor: letterColor
+        }
+      }))), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "sliderLabel"
+      }, "change color"));
+    }
+  }]);
+
+  return Slider;
+}(_react["default"].Component);
+
+exports["default"] = Slider;
+},{"react":160}],171:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -46022,63 +46069,79 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 // I usually use classbased components because I like the OOP feel, but I needed to use hooks for the react-spring animations here, so I used a function based component
 function Timeline(props) {
-  // array of projects that's converted to components to be used in timeline
-  var projects = [{
+  var currentProj = {
     name: "current",
     title: "What I'm Working On Now",
-    description: "I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
+    summary: "I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
     banner: false
-  }, {
-    name: "portfolio",
-    title: "Portfolio",
-    date: "February 2021",
-    technologies: ["HTML/CSS", "Javascript", "React", "Threejs", "Figma", "react-spring"],
-    description: "My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled.",
-    github: "https://github.com/FudgeDaMuffin/portfolio"
-  }, {
-    name: "academicchallenge",
-    title: "Academic Challenge",
-    date: "January-February 2021",
-    technologies: ["HTML/CSS", "Javascript", "Nodejs", "MongoDB", "React", "Socket.io", "Bash"],
-    description: "This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills.",
-    github: "https://github.com/FudgeDaMuffin/academic-challenge",
-    link: "https://academic-challenge.com"
-  }, {
-    name: "idsite",
-    title: "Dartmouth ID Maker",
-    date: "October 2020",
-    technologies: ["HTML/CSS", "Javascript", "jQuery"],
-    description: "This project allows users to customize a Dartmouth ID. As my first personal project of college, it refreshed me on web development skills. It was also a good exercise in implementing pre-made designs, as I used HTML and CSS to replicate a handheld Dartmouth ID almost perfectly.",
-    github: "https://github.com/FudgeDaMuffin/dartmouth-id-creator",
-    link: "idsite/index.html"
-  }, {
-    name: "highschool",
-    title: "High School Projects",
-    date: "2017-2020",
-    technologies: ["HTML/CSS", "Javascript", "jQuery", "Nodejs", "MongoDB", "SQL", "Python"],
-    description: "In high school, I worked on a variety of projects, from apps for my Computer Science Club, to sites for various school organizations, to random passion projects. My code was never very organized or efficient, and I only used HTML and jQuery, with some occasional Nodejs. Still, these projects let me develop my current skills, and although I may not be very proud of them today, I've learned from the mistakes I made then in order to become the dev I am now.",
-    banner: false
-  }].map(function (p, index) {
+  };
+  var projects = [currentProj].concat(_toConsumableArray(loaded_data.projects));
+  projects = projects.map(function (p, index) {
     return /*#__PURE__*/_react["default"].createElement(Project, {
       key: index,
       hue: props.hue,
       disp: props.timeline.bubbleDisp * index,
       project: p
     });
-  }); // these two determine how much to move the timeline with each click, and the maximum amount of movement
+  }); // array of projects that's converted to components to be used in timeline
+  // let projects=[{
+  //         name:"current",
+  //         title:"What I'm Working On Now",
+  //         description:"I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
+  //         banner:false,
+  //     },{
+  //         name:"portfolio",
+  //         title:"Portfolio",
+  //         date:"February 2021",
+  //         technologies:["HTML/CSS","Javascript","React","Threejs","Figma","react-spring"],
+  //         description:"My portfolio, the site you're viewing now, is simple to use but has been complex to make. In this project, I tried to use a more production-esque project structure, and I also experimented with a few new technologies to make the site as pretty as possible. I forayed into 3D modeling with Threejs and Blender, and I tried my first React libraries with Material UI and react-spring. I will continue to polish this portfolio as I become more skilled.",
+  //         github:"https://github.com/FudgeDaMuffin/portfolio"
+  //     }, {
+  //         name:"academicchallenge",
+  //         title:"Academic Challenge",
+  //         date:"January-February 2021",
+  //         technologies:["HTML/CSS","Javascript","Nodejs","MongoDB","React","Socket.io","Bash"],
+  //         description:"This site, made to permit easier and more reliable scorekeeping for my school's academic challenge team, was an opportunity for me to learn and implement a variety of new technologies. I discarded jQuery in favor of React, and I tried out a variety of other new technologies. This ended up being very complex and time-consuming, but it led to me feeling confident in a variety of valuable skills.",
+  //         github:"https://github.com/FudgeDaMuffin/academic-challenge",
+  //         link:"https://academic-challenge.com"
+  //     }, {
+  //         name:"idsite",
+  //         title:"Dartmouth ID Maker",
+  //         date:"October 2020",
+  //         technologies:["HTML/CSS","Javascript","jQuery"],
+  //         description:"This project allows users to customize a Dartmouth ID. As my first personal project of college, it refreshed me on web development skills. It was also a good exercise in implementing pre-made designs, as I used HTML and CSS to replicate a handheld Dartmouth ID almost perfectly.",
+  //         github:"https://github.com/FudgeDaMuffin/dartmouth-id-creator",
+  //         link:"idsite/index.html"
+  //     }, {
+  //         name:"highschool",
+  //         title:"High School Projects",
+  //         date:"2017-2020",
+  //         technologies:["HTML/CSS","Javascript","jQuery","Nodejs","MongoDB","SQL","Python"],
+  //         description: "In high school, I worked on a variety of projects, from apps for my Computer Science Club, to sites for various school organizations, to random passion projects. My code was never very organized or efficient, and I only used HTML and jQuery, with some occasional Nodejs. Still, these projects let me develop my current skills, and although I may not be very proud of them today, I've learned from the mistakes I made then in order to become the dev I am now.",
+  //         banner:false,
+  //     }]
+  // these two determine how much to move the timeline with each click, and the maximum amount of movement
 
   var moveAmount = props.timeline.bubbleSize + props.timeline.bubbleDisp;
-  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 40); // setting initial line displacement
+  var maxDisp = -(moveAmount * (projects.length - 3) + props.timeline.bubbleSize + 60); // setting initial line displacement
 
   var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -46238,7 +46301,7 @@ var Project = /*#__PURE__*/function (_React$Component) {
         id: "projectTitle"
       }, this.props.project.title), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectDate"
-      }, this.props.project.hasOwnProperty("date") ? this.props.project.date : "")), /*#__PURE__*/_react["default"].createElement("div", {
+      }, this.props.project.hasOwnProperty("time") ? this.props.project.time : "")), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectThumbnail",
         onMouseEnter: function onMouseEnter() {
           _this2.setState({
@@ -46254,7 +46317,7 @@ var Project = /*#__PURE__*/function (_React$Component) {
           _this2.toggleInfo();
         }
       }, !this.isCurrent ? /*#__PURE__*/_react["default"].createElement("img", {
-        src: "static/screenshots/" + this.props.project.name + "thumbnail.png",
+        src: this.props.project.icon,
         style: {
           transform: "scale(1." + (this.state.hovering ? 2 : 0) + ")"
         }
@@ -46315,18 +46378,18 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
         src: "static/logos/github-black.png"
       })) : "")), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoBody"
-      }, this.props.project.description), /*#__PURE__*/_react["default"].createElement("div", {
+      }, this.props.project.summary), /*#__PURE__*/_react["default"].createElement("div", {
         id: "projectInfoBanner"
-      }, !this.props.project.hasOwnProperty("banner") ? /*#__PURE__*/_react["default"].createElement("img", {
+      }, this.props.project.banner != "" ? /*#__PURE__*/_react["default"].createElement("img", {
         id: "projectBanner",
-        src: "static/screenshots/" + this.props.project.name + "banner.png"
+        src: this.props.project.banner
       }) : "")));
     }
   }]);
 
   return ProjectInfo;
 }(_react["default"].Component);
-},{"@material-ui/core/Fade":24,"react":160,"react-spring":147}],171:[function(require,module,exports){
+},{"@material-ui/core/Fade":24,"react":160,"react-spring":147}],172:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -46402,6 +46465,15 @@ var App = /*#__PURE__*/function (_React$Component) {
       hue: startingHue,
       bioActive: false
     };
+
+    _this.changeHue = function (component) {
+      return function (newHue) {
+        component.setState({
+          hue: newHue
+        });
+      };
+    };
+
     return _this;
   } //whenever the state changes, change the threejs J to the new hue
 
@@ -46506,5 +46578,8 @@ var animate = function animate() {
   letterJ.rotation.y += 0.005;
   renderer.render(scene, camera);
   controls.update();
-};
-},{"./Bio.js":168,"./BioHeader.js":169,"react":160,"react-dom":143}]},{},[171]);
+}; // window.addEventListener('resize', ()=>{
+//     renderer.setSize(screen.width,screen.height);
+//     camera.aspect=screen.aspect;
+// });
+},{"./Bio.js":168,"./BioHeader.js":169,"react":160,"react-dom":143}]},{},[172]);

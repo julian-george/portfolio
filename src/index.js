@@ -25,11 +25,15 @@ class App extends React.Component {
     constructor(props){
         super(props)
         this.state={ hue:startingHue, bioActive:false }
+        this.changeHue= (component) => (newHue) => {
+            component.setState({hue:newHue})
+        }
     }
     //whenever the state changes, change the threejs J to the new hue
     componentDidUpdate(){
         letterJ.material.color = new THREE.Color("hsl("+this.state.hue+",65%,40%)")
     }
+    
     render() {
         // various colors used that are dependent on the hue
         let fullContainerColor="hsl("+this.state.hue+",55%,3%)"
@@ -64,9 +68,9 @@ ReactDOM.render(< App />, domContainer);
 // threejs boilerplate code
 const scene = new THREE.Scene();
 scene.background= new THREE.Color(0x262422);
-const camera = new THREE.PerspectiveCamera(75, screen.aspect, 0.1 , 10000);
+let camera = new THREE.PerspectiveCamera(75, screen.aspect, 0.1 , 10000);
 camera.position.set(-300,0,0);
-const renderer = new THREE.WebGLRenderer();
+let renderer = new THREE.WebGLRenderer();
 renderer.setSize(screen.width,screen.height);
 
 
@@ -115,6 +119,10 @@ const animate = ()=>{
     controls.update()
 }
 
+// window.addEventListener('resize', ()=>{
+//     renderer.setSize(screen.width,screen.height);
+//     camera.aspect=screen.aspect;
+// });
 
 
 
