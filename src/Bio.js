@@ -37,7 +37,7 @@ class Bio extends React.Component {
                                     <div id="socialrow">
                                         <a href="https://www.linkedin.com/in/julian-george-33b42a1b3/" target="_blank"><img src="static/logos/linkedin.png" /></a>
                                         <a href="https://twitter.com/JulianGeorgeDev" target="_blank"><img src="static/logos/twitter.png" /></a>
-                                        <a href="https://github.com/FudgeDaMuffin" target="_blank"><img src="static/logos/github.png" href="https://github.com/FudgeDaMuffin"/></a>
+                                        <a href="https://github.com/julian-george" target="_blank"><img src="static/logos/github.png" href="https://github.com/FudgeDaMuffin"/></a>
                                     </div>
                                 </div>
                             </div>

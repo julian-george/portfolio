@@ -1,12 +1,13 @@
+{% load static %}
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Julian George's Site</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="personal.js"></script>
+	<script src="{% static 'idsite/personal.js' %}"></script>
 
-	<link rel="stylesheet" href="personal.css">
+	<link rel="stylesheet" href="{% static 'idsite/personal.css' %}">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 	
 </head>
@@ -14,10 +15,10 @@
 	<div id="bg-image"></div>
 	<div class = "card" id="front-card">
 		<div id = "front-top-half">
-			<div id = "dartmouth">Dartmouth<img src="dmouth_seal.png"/></div>
+			<div id = "dartmouth">Dartmouth<img src="{% static 'idsite/dmouth_seal.png' %}"/></div>
 			<div id = "second-row">
 				<div id = "picture">
-					<img id="id-photo" src="idphoto.JPG"/>
+					<img id="id-photo" src="{% static 'idsite/idphoto.JPG' %}"/>
 				</div>
 				<div id = "info">
 					<div id = "info-name">GEORGE, JULIAN C</div>
@@ -30,14 +31,14 @@
 		<div id = "front-bottom-half">
 			<div id = "picture-label">STUDENT</div>
 			<div id = "barcode">
-				<img src="barcode.png">
+				<img src="{% static 'idsite/barcode.png' %}">
 				<span>10101010101010</span>
 			</div>
 		</div>
 	</div>
 	<div id="options-row">
 		<div id="makenew" class="toggleform">Make Your Own ID</div>
-		<div id="flip">Flip <img src="curved-arrow-pointing-down.png"/></div>
+		<div id="flip">Flip <img src="{% static 'idsite/curved-arrow-pointing-down.png' %}"/></div>
 	</div>
 	<div class = "card" id="back-card">
 		<div id="back-top-half"></div>

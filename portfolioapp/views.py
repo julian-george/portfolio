@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Skill, Project
+from django.template import Context, loader
 import json
 
 def main_view(request,*args,**kwargs):
@@ -36,5 +37,7 @@ def main_view(request,*args,**kwargs):
             obj["banner"]=""
         serializedProjects.append(obj)
     data = {'skills':serializedSkills, 'projects':serializedProjects}
-    return render(request,'index.html',{'data':json.dumps(data)})
-    
+    return render(request,'main.html',{'data':json.dumps(data)})
+
+def idsite_view(request,*args,**kwargs):
+    return render(request,'idsite.html')

@@ -123,13 +123,18 @@
 }
 #projectInfoHead {
     padding:4px 6px;
-    display:inline-flex
+    display:inline-flex;
+    width:100%
 }
 #projectInfoTitle {
     font-family:Helvetica;
     color:black;
     font-size:24px;
     font-weight:bold;
+    width:80%;
+}
+#projectInfoIcons {
+    width:20%
 }
 #projectGit {
     height:24px;
