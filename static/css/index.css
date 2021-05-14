@@ -76,7 +76,7 @@ a {
     justify-content:space-evenly
 }
 #socialrow > a {
-    margin-top:auto
+    margin-top:6px;
 }
 #socialrow > a > img {
     height:24px;
