@@ -32,6 +32,8 @@ Django and Postgres
 7. In `./portfolio/settings.py`, replace the details for the `default` database with those from your Postgres DB
 8. Import my DB to your Postgres DB
     - Download it [here](https://portfoliodump.s3.us-east-2.amazonaws.com/portfoliodump)
+    - Use `psql databasename < data_base_dump_file` to do so
+    - databasename should be "portfolio"
 9. To create an admin user to create Skills and Projects, run `python manage.py createsuperuser`
 10. Run `npm run-script start` or `python manage.py runserver` to initialize app
     - Every time you edit files in `./src`, run `npm build` to update the site.
