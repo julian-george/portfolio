@@ -46569,12 +46569,12 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
           className: "projectInfoHead"
         }, /*#__PURE__*/_react["default"].createElement("div", {
           className: "projectInfoTitle"
-        }, project.hasOwnProperty("link") ? /*#__PURE__*/_react["default"].createElement("a", {
+        }, project.link != "" ? /*#__PURE__*/_react["default"].createElement("a", {
           href: project.link,
           target: "_blank"
         }, project.title) : project.title), /*#__PURE__*/_react["default"].createElement("div", {
           className: "projectInfoIcons"
-        }, project.hasOwnProperty("github") ? /*#__PURE__*/_react["default"].createElement("a", {
+        }, project.github != "" ? /*#__PURE__*/_react["default"].createElement("a", {
           href: project.github,
           target: "_blank"
         }, /*#__PURE__*/_react["default"].createElement("img", {
@@ -46716,10 +46716,9 @@ Goals:
 
 /* TODO:
 - Add outline to J
-- Fix timeline by restyling everything
-- Finalize colors
-- Create day mode?
-- Project page with Django db serverside loading
+- Use Redux to manage hue and to fix timeline
+- Add day mode?
+- Perfect design
 */
 
 var App = /*#__PURE__*/function (_React$Component) {

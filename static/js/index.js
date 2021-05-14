@@ -52,10 +52,9 @@ Goals:
 
 /* TODO:
 - Add outline to J
-- Fix timeline by restyling everything
-- Finalize colors
-- Create day mode?
-- Project page with Django db serverside loading
+- Use Redux to manage hue and to fix timeline
+- Add day mode?
+- Perfect design
 */
 
 var App = /*#__PURE__*/function (_React$Component) {
