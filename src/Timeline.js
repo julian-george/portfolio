@@ -130,7 +130,7 @@ class ProjectInfo extends React.Component {
                                     {( project.link != "") ? <a href={ project.link} target="_blank">{ project.title}</a> : ( project.title)}
                                 </div>
                                 <div className ="projectInfoIcons">
-                                    {( project.github !="") ? <a href={ project.github} target="_blank"><img className="projectGit" src="static/logos/github-black.png" ></img></a> : ""}
+                                    {( project.github != "") ? <a href={ project.github} target="_blank"><img className="projectGit" src="static/logos/github-black.png" ></img></a> : ""}
                                 </div>
                             </div>
                             <div className="projectInfoSubtitle">
