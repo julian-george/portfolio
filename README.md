@@ -15,7 +15,7 @@ React (used heavily), three.js, Material UI, react-spring.
 Django and Postgres
 
 ## Local Deployment (on Windows)
-### Apologies if the app isn't well-suited for local deployment, I will improve this in the future.
+### This app is **not** well suited for local deployment, but here is roughly how to do it
 1. Things you need to have
     - Python 3 (I used 3.9)
     - pip
@@ -30,12 +30,14 @@ Django and Postgres
     - e.g `SECRET_KEY=mysecretkeydontsteal`
     - actual key doesn't matter
 7. In `./portfolio/settings.py`, replace the details for the `default` database with those from your Postgres DB
-8. To create an admin user to create Skills and Projects, run `python manage.py createsuperuser`
-9. Run `npm run-script start` or `python manage.py runserver` to initialize app
+8. Import my DB to your Postgres DB
+    - Download it [here](https://portfoliodump.s3.us-east-2.amazonaws.com/portfoliodump)
+9. To create an admin user to create Skills and Projects, run `python manage.py createsuperuser`
+10. Run `npm run-script start` or `python manage.py runserver` to initialize app
     - Every time you edit files in `./src`, run `npm build` to update the site.
-10. Go to `localhost:8000` to view the site
+11. Go to `localhost:8000` to view the site
     - It will likely not work until you add some Skills and Projects, go to step 11 to do so.
-11. Go to `localhost:8000/admin` to add Skills and Projects
+12. Go to `localhost:8000/admin` to add Skills and Projects
     - Use user details from step 8
     - Add Skills and Projects as desired
 

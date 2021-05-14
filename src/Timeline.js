@@ -127,10 +127,10 @@ class ProjectInfo extends React.Component {
                             </div>
                             <div className="projectInfoHead">
                                 <div className ="projectInfoTitle">
-                                    {( project.hasOwnProperty("link")) ? <a href={ project.link} target="_blank">{ project.title}</a> : ( project.title)}
+                                    {( project.link != "") ? <a href={ project.link} target="_blank">{ project.title}</a> : ( project.title)}
                                 </div>
                                 <div className ="projectInfoIcons">
-                                    {( project.hasOwnProperty("github")) ? <a href={ project.github} target="_blank"><img className="projectGit" src="static/logos/github-black.png" ></img></a> : ""}
+                                    {( project.github !="") ? <a href={ project.github} target="_blank"><img className="projectGit" src="static/logos/github-black.png" ></img></a> : ""}
                                 </div>
                             </div>
                             <div className="projectInfoSubtitle">

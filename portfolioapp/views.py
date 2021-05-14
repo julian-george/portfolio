@@ -27,7 +27,7 @@ def main_view(request,*args,**kwargs):
         'skills':project.skills,
         'takeaways':project.takeaways,
         'summary':project.summary,
-        'github':project.github,
+        'github':project.github if hasattr(project,"github") else "",
         'link':project.link if hasattr(project,"link") else "",
         'icon':project.icon.url,
         'banner':project.banner.url if project.banner else ""
