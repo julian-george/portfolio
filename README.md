@@ -5,7 +5,7 @@ One large goal was for it to be maintainable for the foreseeable future, as I ad
 
 There are a lot more aspects to this site, from my exploration into 3D modeling to all of the animations I utilized for the first time. To sum it all up, I experimented with a ton of new technologies and I endeavored to use best practices to showcase my development skills.
 
-### **Visit it at [www.juliangeorge.net](www.juliangeorge.net)**
+### **Visit it at [www.juliangeorge.net](https://www.juliangeorge.net)**
 
 
 ## Stack
