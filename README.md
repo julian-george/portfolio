@@ -5,7 +5,7 @@ One large goal was for it to be maintainable for the foreseeable future, as I ad
 
 There are a lot more aspects to this site, from my exploration into 3D modeling to all of the animations I utilized for the first time. To sum it all up, I experimented with a ton of new technologies and I endeavored to use best practices to showcase my development skills.
 
-### **Visit it at [www.juliangeorge.net](www.juliangeorge.net)**
+### **Visit it at [www.juliangeorge.net](https://www.juliangeorge.net)**
 
 
 ## Stack
@@ -32,12 +32,13 @@ Django and Postgres
 7. In `./portfolio/settings.py`, replace the details for the `default` database with those from your Postgres DB
 8. Import my DB to your Postgres DB
     - Download it [here](https://portfoliodump.s3.us-east-2.amazonaws.com/portfoliodump)
+    - Use `psql databasename < data_base_dump_file` to do so
+    - databasename should be "portfolio"
 9. To create an admin user to create Skills and Projects, run `python manage.py createsuperuser`
 10. Run `npm run-script start` or `python manage.py runserver` to initialize app
     - Every time you edit files in `./src`, run `npm build` to update the site.
 11. Go to `localhost:8000` to view the site
-    - It will likely not work until you add some Skills and Projects, go to step 11 to do so.
-12. Go to `localhost:8000/admin` to add Skills and Projects
+12. Go to `localhost:8000/admin` to add and edit Skills and Projects
     - Use user details from step 8
     - Add Skills and Projects as desired
 
