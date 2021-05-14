@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Fade from '@material-ui/core/Fade';
 
 import Timeline from "./Timeline.js"
+import SkillGrid from "./SkillGrid.js"
+
 // this component encompasses everything outside of the threejs animation
 class Bio extends React.Component {
     constructor(props){
         super(props)
-        this.skills=loaded_data.skills.sort((a, b)=> a.name.localeCompare(b.name))
+        this.skills=loaded_data.skills
         // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
         this.timeline = {
             bubbleSize:160,
@@ -15,9 +17,6 @@ class Bio extends React.Component {
         }  
     }
     render(){
-        // converting skill array into < Skill /> components
-        let skillComponents=this.skills.map((s,index)=>(<Skill hue={this.props.hue} name={s.name} icon={s.icon} key={index}/>))
-        let saturatedColor="hsl("+this.props.hue+",80%,40%)"
         let avatarColor="hsl("+this.props.hue+",85%,30%)"
                                                         
         // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
@@ -47,9 +46,7 @@ class Bio extends React.Component {
                         </div>
                         <div id="skills">
                             <div id = "skillTitle">Primary Skills</div>
-                            <div id ="skillGrid">
-                                {skillComponents}
-                            </div>
+                            < SkillGrid hue={this.props.hue} skills= {this.skills}  />
                         </div>
                     </div>
                     <div id = "timelineContainer">
@@ -57,7 +54,6 @@ class Bio extends React.Component {
                         <div id ="timelinebody">
                             < Timeline hue={this.props.hue} timeline={this.timeline}  /> 
                         </div>
-                        
                     </div>
                 </div>
             </Fade>
@@ -66,16 +62,5 @@ class Bio extends React.Component {
     }
 }
 // simple skill component, just the skill and a logo for it on a div
-class Skill extends React.Component {
-    constructor(props){ super(props) }
-    render() {
-        let bgColor="hsl("+this.props.hue+",10%,15%)"
-        return (
-            <div className="skill" style={{backgroundColor:bgColor}}>
-                <img src={this.props.icon}></img>
-                <span>{this.props.name}</span>
-            </div>
-        )
-    }
-}
+
 export default Bio

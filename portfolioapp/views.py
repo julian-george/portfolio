@@ -4,9 +4,10 @@ from django.template import Context, loader
 import json
 
 def main_view(request,*args,**kwargs):
-    skills = list(Skill.objects.all())
+    skills = list(Skill.objects.all().filter(displayed=True))
+    skills.sort(key= lambda skill: skill.experience, reverse=True)
     projects = list(Project.objects.all())
-    print(projects[3].banner)
+    projects.sort(key = lambda proj: proj.order_date, reverse=True)
     serializedSkills=[]
     serializedProjects=[]
     for skill in skills:
@@ -18,23 +19,19 @@ def main_view(request,*args,**kwargs):
         })
     for project in projects:
         obj = {
-        'orderid':project.orderid,
         'title':project.title,
         'time':project.time,
-        'duration':project.duration,
+        'duration':project.duration if hasattr(project,"duration") else "",
         'role':project.role,
         'collaboration':project.collaboration,
         'skills':project.skills,
-        'description':project.description,
+        'takeaways':project.takeaways,
         'summary':project.summary,
         'github':project.github,
-        'link':project.link,
+        'link':project.link if hasattr(project,"link") else "",
         'icon':project.icon.url,
+        'banner':project.banner.url if project.banner else ""
         }
-        if (project.banner):
-            obj["banner"]=project.banner.url
-        else:
-            obj["banner"]=""
         serializedProjects.append(obj)
     data = {'skills':serializedSkills, 'projects':serializedProjects}
     return render(request,'main.html',{'data':json.dumps(data)})

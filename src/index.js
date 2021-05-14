@@ -16,10 +16,9 @@ Goals:
 */
 /* TODO:
 - Add outline to J
-- Fix timeline by restyling everything
-- Finalize colors
-- Create day mode?
-- Project page with Django db serverside loading
+- Use Redux to manage hue and to fix timeline
+- Add day mode?
+- Perfect design
 */
 class App extends React.Component {
     constructor(props){
@@ -86,7 +85,7 @@ cont.appendChild(renderer.domElement);
 let letterJ; 
 
 let objLoader = new THREE.OBJLoader();
-objLoader.load('static/LetterJ.obj',(object)=>{
+objLoader.load('static/3d/LetterJ.obj',(object)=>{
     object=object.children[0]
     
     // taking geometry out of object and giving it new material so that the hue can be altered

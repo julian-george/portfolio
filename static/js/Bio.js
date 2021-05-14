@@ -7,17 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _Fade = _interopRequireDefault(require("@material-ui/core/Fade"));
 
 var _Timeline = _interopRequireDefault(require("./Timeline.js"));
 
+var _SkillGrid = _interopRequireDefault(require("./SkillGrid.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -51,9 +49,7 @@ var Bio = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Bio);
 
     _this = _super.call(this, props);
-    _this.skills = loaded_data.skills.sort(function (a, b) {
-      return a.name.localeCompare(b.name);
-    }); // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
+    _this.skills = loaded_data.skills; // attributes for the timeline bubbles, up at the top of the hierarchy to be edited easier
 
     _this.timeline = {
       bubbleSize: 160,
@@ -66,18 +62,6 @@ var Bio = /*#__PURE__*/function (_React$Component) {
   _createClass(Bio, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      // converting skill array into < Skill /> components
-      var skillComponents = this.skills.map(function (s, index) {
-        return /*#__PURE__*/_react["default"].createElement(Skill, {
-          hue: _this2.props.hue,
-          name: s.name,
-          icon: s.icon,
-          key: index
-        });
-      });
-      var saturatedColor = "hsl(" + this.props.hue + ",80%,40%)";
       var avatarColor = "hsl(" + this.props.hue + ",85%,30%)"; // this contains pretty much everything, from bio info to skills to timeline, wrapped in a material UI fade component for the initial fade animation (may change later)
 
       return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
@@ -124,9 +108,10 @@ var Bio = /*#__PURE__*/function (_React$Component) {
         id: "skills"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         id: "skillTitle"
-      }, "Primary Skills"), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "skillGrid"
-      }, skillComponents))), /*#__PURE__*/_react["default"].createElement("div", {
+      }, "Primary Skills"), /*#__PURE__*/_react["default"].createElement(_SkillGrid["default"], {
+        hue: this.props.hue,
+        skills: this.skills
+      }))), /*#__PURE__*/_react["default"].createElement("div", {
         id: "timelineContainer"
       }, /*#__PURE__*/_react["default"].createElement("div", {
         id: "timelinetitle"
@@ -142,35 +127,6 @@ var Bio = /*#__PURE__*/function (_React$Component) {
   return Bio;
 }(_react["default"].Component); // simple skill component, just the skill and a logo for it on a div
 
-
-var Skill = /*#__PURE__*/function (_React$Component2) {
-  _inherits(Skill, _React$Component2);
-
-  var _super2 = _createSuper(Skill);
-
-  function Skill(props) {
-    _classCallCheck(this, Skill);
-
-    return _super2.call(this, props);
-  }
-
-  _createClass(Skill, [{
-    key: "render",
-    value: function render() {
-      var bgColor = "hsl(" + this.props.hue + ",10%,15%)";
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "skill",
-        style: {
-          backgroundColor: bgColor
-        }
-      }, /*#__PURE__*/_react["default"].createElement("img", {
-        src: this.props.icon
-      }), /*#__PURE__*/_react["default"].createElement("span", null, this.props.name));
-    }
-  }]);
-
-  return Skill;
-}(_react["default"].Component);
 
 var _default = Bio;
 exports["default"] = _default;

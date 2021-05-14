@@ -1,0 +1,67 @@
+#hoverName{
+    position:relative;
+    font-family:Helvetica;
+    top:-80px;
+    left:12px;
+    height:76px
+}
+#hoverName > span {
+    font-size:64px;
+    color:#FFFFFF;
+    z-index:3;
+    position:relative;
+}
+#bio {
+    margin: 0 auto;
+    width:1200px;
+    position:relative;
+}
+#sliderContainer {
+    width:220px;
+    height:60px;
+    right:16px;
+    top:16px;
+    position:absolute;
+    cursor:auto;
+    z-index:3;
+}
+#colorSlider {
+    width:172px;
+    height:4px;
+    position:absolute;
+    right:32px;
+    top:28px;
+    background-color:white;
+    cursor:pointer;
+}
+#sliderDot {
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    position:relative;
+    top:-10px;
+    left:-4px; 
+    background-color:white
+}
+#dotColor {
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    position:relative;
+    top:2px;
+    left:2px
+}
+#sliderLabel {
+    position:absolute;
+    right:32px;
+    top:40px;
+    font-size:12px
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
+    color:white
+    
+}

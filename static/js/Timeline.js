@@ -64,7 +64,7 @@ function Timeline(props) {
   var currentProj = {
     name: "current",
     title: "What I'm Working On Now",
-    summary: "I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
+    summary: "I'm currently working with the Magnuson Center, adding features and refining the MCCV platform for the 2021-2022 year. I'm also making slight edits to this portfolio as I apply to internships. Then, I will relax this summer before getting back on the grind in the fall.",
     banner: false
   };
   var projects = [currentProj].concat(_toConsumableArray(loaded_data.projects));
@@ -109,6 +109,7 @@ function Timeline(props) {
       toggleRight(false);
       toggleLeft(true);
     } else {
+      // makes it so shown projects don't clip outside of container
       if (lineDisplacement == 0) newDisp -= props.timeline.bubbleDisp;
       toggleLeft(true);
       toggleRight(true);
@@ -214,14 +215,15 @@ var Project = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var project = this.props.project;
       return /*#__PURE__*/_react["default"].createElement("div", {
-        id: "project",
+        className: "project",
         style: {
           left: this.props.disp,
           backgroundColor: this.isCurrent ? this.state.hovering ? "hsl(" + this.props.hue + ",95%,25%)" : "hsl(" + this.props.hue + ",75%,40%)" : "white"
         }
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectHead",
+        className: "projectHead",
         onMouseEnter: function onMouseEnter() {
           _this2.setState({
             hovering: true
@@ -236,11 +238,11 @@ var Project = /*#__PURE__*/function (_React$Component) {
           _this2.toggleInfo();
         }
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectTitle"
-      }, this.props.project.title), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectDate"
-      }, this.props.project.hasOwnProperty("time") ? this.props.project.time : "")), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectThumbnail",
+        className: "projectTitle"
+      }, project.title), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "projectDate"
+      }, project.hasOwnProperty("time") ? project.time : "")), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "projectThumbnail",
         onMouseEnter: function onMouseEnter() {
           _this2.setState({
             hovering: true
@@ -255,12 +257,12 @@ var Project = /*#__PURE__*/function (_React$Component) {
           _this2.toggleInfo();
         }
       }, !this.isCurrent ? /*#__PURE__*/_react["default"].createElement("img", {
-        src: this.props.project.icon,
+        src: project.icon,
         style: {
           transform: "scale(1." + (this.state.hovering ? 2 : 0) + ")"
         }
       }) : ""), /*#__PURE__*/_react["default"].createElement(ProjectInfo, {
-        project: this.props.project,
+        project: project,
         hue: this.props.hue,
         active: this.state.infoActive,
         parent: this
@@ -289,41 +291,111 @@ var ProjectInfo = /*#__PURE__*/function (_React$Component2) {
       var _this3 = this;
 
       // rendering the inherited project info
-      return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
+      var project = this.props.project;
+
+      if (project.name != "current") {
+        return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
+          "in": this.props.active
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfo"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "closeItem",
+          onClick: function onClick() {
+            _this3.props.parent.toggleInfo();
+          }
+        }, /*#__PURE__*/_react["default"].createElement("span", null, "\uD83D\uDDD9")), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoHead"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoTitle"
+        }, project.hasOwnProperty("link") ? /*#__PURE__*/_react["default"].createElement("a", {
+          href: project.link,
+          target: "_blank"
+        }, project.title) : project.title), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoIcons"
+        }, project.hasOwnProperty("github") ? /*#__PURE__*/_react["default"].createElement("a", {
+          href: project.github,
+          target: "_blank"
+        }, /*#__PURE__*/_react["default"].createElement("img", {
+          className: "projectGit",
+          src: "static/logos/github-black.png"
+        })) : "")), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoSubtitle"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoTime"
+        }, project.time + (project.duration != "" ? " | " + project.duration : "")), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoRoles"
+        }, project.collaboration + " | " + project.role.join(", "))), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoBody"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoSummary"
+        }, project.summary), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoSkills"
+        }, project.skills.map(function (skill, index) {
+          return /*#__PURE__*/_react["default"].createElement(SkillPill, {
+            text: skill,
+            key: index,
+            hue: _this3.props.hue
+          });
+        })), /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoTakeaways"
+        }, /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoTakeawaysTitle"
+        }, "Takeaways"), /*#__PURE__*/_react["default"].createElement("ul", null, project.takeaways.map(function (take, index) {
+          return /*#__PURE__*/_react["default"].createElement("li", {
+            key: index
+          }, take);
+        }))), project.link != "" ? /*#__PURE__*/_react["default"].createElement("div", {
+          className: "projectInfoLink"
+        }, /*#__PURE__*/_react["default"].createElement("a", {
+          href: project.link
+        }, " Visit Here ")) : "")));
+      } else return /*#__PURE__*/_react["default"].createElement(_Fade["default"], {
         "in": this.props.active
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectInfo",
-        "data-content": "red"
+        className: "projectInfo"
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "closeProject",
+        className: "closeItem",
         onClick: function onClick() {
           _this3.props.parent.toggleInfo();
         }
       }, /*#__PURE__*/_react["default"].createElement("span", null, "\uD83D\uDDD9")), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectInfoHead"
+        className: "projectInfoHead"
       }, /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectInfoTitle"
-      }, this.props.project.hasOwnProperty("link") ? /*#__PURE__*/_react["default"].createElement("a", {
-        href: this.props.project.link,
-        target: "_blank"
-      }, this.props.project.title) : this.props.project.title), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectInfoIcons"
-      }, this.props.project.hasOwnProperty("github") ? /*#__PURE__*/_react["default"].createElement("a", {
-        href: this.props.project.github,
-        target: "_blank"
-      }, /*#__PURE__*/_react["default"].createElement("img", {
-        id: "projectGit",
-        src: "static/logos/github-black.png"
-      })) : "")), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectInfoBody"
-      }, this.props.project.summary), /*#__PURE__*/_react["default"].createElement("div", {
-        id: "projectInfoBanner"
-      }, this.props.project.banner != "" ? /*#__PURE__*/_react["default"].createElement("img", {
-        id: "projectBanner",
-        src: this.props.project.banner
-      }) : "")));
+        className: "projectInfoTitle"
+      }, project.title)), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "projectInfoBody"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "projectInfoSummary"
+      }, project.summary))));
     }
   }]);
 
   return ProjectInfo;
+}(_react["default"].Component);
+
+var SkillPill = /*#__PURE__*/function (_React$Component3) {
+  _inherits(SkillPill, _React$Component3);
+
+  var _super3 = _createSuper(SkillPill);
+
+  function SkillPill(props) {
+    _classCallCheck(this, SkillPill);
+
+    return _super3.call(this, props);
+  }
+
+  _createClass(SkillPill, [{
+    key: "render",
+    value: function render() {
+      var pillColor = "hsl(" + this.props.hue + ",70%,35%)";
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        className: "skillPill",
+        style: {
+          backgroundColor: pillColor
+        }
+      }, this.props.text);
+    }
+  }]);
+
+  return SkillPill;
 }(_react["default"].Component);

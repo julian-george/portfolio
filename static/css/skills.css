@@ -1,0 +1,103 @@
+:root {
+    --headHeight:56px
+}
+#skills {
+    width:48%;
+    position:relative;
+    left:4%;
+}
+#skillTitle{
+    position:relative;
+    top:80px;
+    font-family:Helvetica;
+    font-size:28px;
+    font-weight:600;
+    color:white;
+}
+#skillGrid {
+    position:relative;
+    top:104px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+.skill {
+    position:relative;
+    display:flex;
+    cursor:pointer;
+    transition:all .3s;
+}
+.skill > img {
+    width:65%;
+    height:65%;
+    margin: 7.5% auto 0 auto;
+}
+.skill > span {
+    color:white;
+    width:100%;
+    text-align:center;
+    font-family:Helvetica;
+    position:absolute;
+    bottom:4px;
+    left:0px
+}
+
+#skillModal {
+    width:360px;
+    min-height:180px;
+    top:calc((100vh - 360px) / 2);
+    left:calc((100vw - 360px) / 2);
+    z-index:5;
+    position:fixed;
+    font-family:Helvetica;
+    color:white;
+    padding:16px 20px;
+    -webkit-box-shadow: 0px 10px 10px 5px rgba(0,0,0,0.5); 
+    box-shadow: 0px 10px 10px 5px rgba(0,0,0,0.5);
+}
+#modalHead {
+    height:var(--headHeight);
+    display:inline-flex;
+    margin-bottom:8px;
+}
+#modalLogo {
+    display:flex;
+    width:var(--headHeight);
+    height:100%;
+    border-radius:50%;
+}
+#modalLogo > img {
+    height:90%;
+    width:90%;
+    margin:auto;
+}
+#modalInfo {
+    margin-left:8px
+}
+#modalTitle {
+    font-size:32px;
+    font-weight: bold;
+    line-height:36px
+}
+#modalExperience{
+    display:inline-flex
+}
+#modalExperience > span {
+    font-size:14px;
+    line-height:20px;
+}
+#modalBody {
+    font-size:16px;
+    margin-bottom:24px;
+}
+.expBubble {
+    border-radius:50%;
+    height:18px;
+    width:18px;
+    display:flex;
+    margin-right:4px;
+}
+.expBubble > span {
+    margin:auto;
+    font-size:12px;
+}

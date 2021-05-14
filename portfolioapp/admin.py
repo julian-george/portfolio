@@ -1,6 +1,13 @@
 from django.contrib import admin
-
 from .models import Skill, Project
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
-admin.site.register(Skill)
-admin.site.register(Project)
+
+class ProjectModelAdmin(admin.ModelAdmin, DynamicArrayMixin):
+    list_display=('title','time')
+
+class SkillModelAdmin(admin.ModelAdmin):
+    list_display=('name','displayed')
+
+admin.site.register(Skill,SkillModelAdmin)
+admin.site.register(Project,ProjectModelAdmin)

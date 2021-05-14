@@ -153,7 +153,7 @@ cont.appendChild(renderer.domElement); // this will be used to store imported J 
 
 var letterJ;
 var objLoader = new THREE.OBJLoader();
-objLoader.load('static/LetterJ.obj', function (object) {
+objLoader.load('static/3d/LetterJ.obj', function (object) {
   object = object.children[0]; // taking geometry out of object and giving it new material so that the hue can be altered
 
   var material = new THREE.MeshBasicMaterial({

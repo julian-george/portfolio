@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import {useSpring, animated} from 'react-spring'
 import Fade from '@material-ui/core/Fade';
 
+
 // I usually use classbased components because I like the OOP feel, but I needed to use hooks for the react-spring animations here, so I used a function based component
 export default function Timeline (props) {
     let currentProj= {
             name:"current",
             title:"What I'm Working On Now",
-            summary:"I'm currently polishing this portfolio site to make it as perfect as possible before using it for internship applications.",
+            summary:"I'm currently working with the Magnuson Center, adding features and refining the MCCV platform for the 2021-2022 year. I'm also making slight edits to this portfolio as I apply to internships. Then, I will relax this summer before getting back on the grind in the fall.",
             banner:false,
         }
     let projects = [currentProj,...loaded_data.projects]
@@ -84,26 +85,27 @@ class Project extends React.Component {
         else this.setState({infoActive:true})
     }
     render() {
+        let project=this.props.project
         return (
-            <div id ="project"   style={{
+            <div className ="project"   style={{
                         left:this.props.disp,
                         backgroundColor:((this.isCurrent) ? ((this.state.hovering) ? "hsl("+this.props.hue+",95%,25%)":"hsl("+this.props.hue+",75%,40%)") : "white")}
                 }>
 
-                <div id="projectHead" 
+                <div className="projectHead" 
                     onMouseEnter={()=>{this.setState({hovering:true})}} 
                     onMouseLeave={()=>{this.setState({hovering:false})}}
                     onClick={()=>{this.toggleInfo()}}>
-                    <div id="projectTitle">{this.props.project.title}</div>
-                    <div id ="projectDate">{(this.props.project.hasOwnProperty("time")) ? this.props.project.time: ""}</div>
+                    <div className="projectTitle">{project.title}</div>
+                    <div className ="projectDate">{( project.hasOwnProperty("time")) ?  project.time: ""}</div>
                 </div>
-                <div id="projectThumbnail" 
+                <div className="projectThumbnail" 
                     onMouseEnter={()=>{this.setState({hovering:true})}} 
                     onMouseLeave={()=>{this.setState({hovering:false})}}
                     onClick={()=>{this.toggleInfo()}} >
-                    {(!this.isCurrent) ? <img src={this.props.project.icon} style={{transform:"scale(1."+((this.state.hovering)? 2 : 0)+")"}} /> : ""}
+                    {(!this.isCurrent) ? <img src={ project.icon} style={{transform:"scale(1."+((this.state.hovering)? 2 : 0)+")"}} /> : ""}
                 </div>
-                <ProjectInfo project={this.props.project} hue={this.props.hue} active={this.state.infoActive} parent={this}/>
+                <ProjectInfo project={ project} hue={this.props.hue} active={this.state.infoActive} parent={this}/>
             </div>
         )
     }
@@ -115,31 +117,79 @@ class ProjectInfo extends React.Component {
     }
     render(){
         // rendering the inherited project info
-        return(
+        let project = this.props.project
+        if (project.name!="current") {
+            return(
+                <Fade in ={this.props.active}>
+                        <div className="projectInfo">
+                            <div className ="closeItem" onClick={()=>{this.props.parent.toggleInfo()}}>
+                                <span>🗙</span>
+                            </div>
+                            <div className="projectInfoHead">
+                                <div className ="projectInfoTitle">
+                                    {( project.hasOwnProperty("link")) ? <a href={ project.link} target="_blank">{ project.title}</a> : ( project.title)}
+                                </div>
+                                <div className ="projectInfoIcons">
+                                    {( project.hasOwnProperty("github")) ? <a href={ project.github} target="_blank"><img className="projectGit" src="static/logos/github-black.png" ></img></a> : ""}
+                                </div>
+                            </div>
+                            <div className="projectInfoSubtitle">
+                                <div className = "projectInfoTime">
+                                    { project.time + ((project.duration!="") ? " | "+project.duration : "") } 
+                                </div>
+                                <div className = "projectInfoRoles">
+                                    { project.collaboration + " | " + project.role.join(", ") }
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="projectInfoBody">
+                                <div className = "projectInfoSummary">
+                                    { project.summary}
+                                </div>
+                                <div className = "projectInfoSkills">
+                                    {project.skills.map((skill, index)=>{return(<SkillPill text={skill} key={index} hue={this.props.hue}/>)})}
+                                </div>
+                                <div className = "projectInfoTakeaways">
+                                    <div className="projectInfoTakeawaysTitle">Takeaways</div>
+                                    <ul>
+                                        {project.takeaways.map((take, index)=>{return(<li key={index}>{take}</li>)})}
+                                    </ul>
+                                </div>
+                                {(project.link != "") ? (<div className="projectInfoLink"><a href={project.link}> Visit Here </a></div>) : ""}
+                            </div>
+                        </div>
+                </Fade>
+            )
+        }
+        else return (
             <Fade in ={this.props.active}>
-
-                    <div id="projectInfo" data-content={"red"}>
-                        <div id ="closeProject" onClick={()=>{this.props.parent.toggleInfo()}}>
-                            <span>🗙</span>
-                        </div>
-                        <div id="projectInfoHead">
-                            <div id ="projectInfoTitle">
-                                {(this.props.project.hasOwnProperty("link")) ? <a href={this.props.project.link} target="_blank">{this.props.project.title}</a> : (this.props.project.title)}
-                                
+                        <div className="projectInfo">
+                            <div className ="closeItem" onClick={()=>{this.props.parent.toggleInfo()}}>
+                                <span>🗙</span>
                             </div>
-                            <div id ="projectInfoIcons">
-                                {(this.props.project.hasOwnProperty("github")) ? <a href={this.props.project.github} target="_blank"><img id="projectGit" src="static/logos/github-black.png" ></img></a> : ""}
+                            <div className="projectInfoHead">
+                                <div className ="projectInfoTitle">
+                                    {project.title}
+                                </div>
+                            </div>
+                            <div className="projectInfoBody">
+                                <div className = "projectInfoSummary">
+                                    { project.summary}
+                                </div>
                             </div>
                         </div>
-                        <div id="projectInfoBody">
-                            {this.props.project.summary}
-                        </div>
-                        <div id ="projectInfoBanner">
-                            {(this.props.project.banner!="") ? <img id="projectBanner" src={this.props.project.banner} />:""}
-                        </div>
-                    </div>
-                
-            </Fade>
+                </Fade>
         )
+        
+    }
+}
+
+class SkillPill extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        let pillColor="hsl("+this.props.hue+",70%,35%)"
+        return (<div className="skillPill" style={{backgroundColor:pillColor}}>{this.props.text}</div>)
     }
 }
