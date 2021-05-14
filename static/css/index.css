@@ -73,10 +73,10 @@ a {
 #socialrow {
     display:inline-flex;
     width:160px;
-    justify-content:space-evenly
 }
 #socialrow > a {
-    margin-top:6px;
+    margin-top:4px;
+    margin-right:20px
 }
 #socialrow > a > img {
     height:24px;
