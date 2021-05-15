@@ -123,7 +123,7 @@ class ProjectInfo extends React.Component {
                 <Fade in ={this.props.active}>
                         <div className="projectInfo">
                             <div className ="closeItem" onClick={()=>{this.props.parent.toggleInfo()}}>
-                                <span>🗙</span>
+                                <span>×</span>
                             </div>
                             <div className="projectInfoHead">
                                 <div className ="projectInfoTitle">

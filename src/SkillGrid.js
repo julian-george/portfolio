@@ -91,7 +91,7 @@ class SkillModal extends React.Component {
                     backgroundColor:bgColor
                     }}>
                     <div className ="closeItem" onClick={()=>{this.props.parent.closeModal()}}>
-                        <span>🗙</span>
+                        <span>×</span>
                     </div>
                     <div id ="modalHead">
                         <div id="modalLogo" style={{backgroundColor:logoBgColor}}>
