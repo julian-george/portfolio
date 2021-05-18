@@ -8,7 +8,7 @@ export default function Timeline (props) {
     let currentProj= {
             name:"current",
             title:"What I'm Working On Now",
-            summary:"I'm currently working with the Magnuson Center, adding features and refining the MCCV platform for the 2021-2022 year. I'm also making slight edits to this portfolio as I apply to internships. Then, I will relax this summer before getting back on the grind in the fall.",
+            summary:"I'm currently working with the Magnuson Center, adding features and refining the MCCV platform for the 2021-2022 year. I'm also making slight edits to this portfolio as I apply to internships. I plan to make personal projects utilizing Typescript and/or Sass, two languages I've newly become familiar with.",
             banner:false,
         }
     let projects = [currentProj,...loaded_data.projects]
