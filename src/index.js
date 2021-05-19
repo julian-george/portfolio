@@ -7,7 +7,7 @@ import BioHeader from "./BioHeader.js"
 let screen = {width:1200,height:window.innerHeight-88};
 screen.aspect= screen.width/screen.height
 //this variable defines what the hue at the left of the color slider is
-const startingHue = 34
+const startingHue = 34;
 /* 
 Goals:
 1. Better Project Structuring (no CDN links)
