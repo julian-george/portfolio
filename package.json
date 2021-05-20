@@ -6,7 +6,7 @@
   "scripts": {
     "start": "python manage.py runserver",
     "dev": "concurrently --kill-others \"python manage.py runserver\" \"npx webpack --watch --mode=development\"",
-    "build": "npx babel src --out-dir static/js & browserify static/js/index.js > static/js/compiled.js",
+    "build": "npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
