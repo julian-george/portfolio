@@ -4,7 +4,8 @@
   "description": "Julian George's Personal Portfolio Site",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"python manage.py runserver\" \"npx webpack --watch --mode=development\"",
+    "start": "python manage.py runserver",
+    "dev": "concurrently --kill-others \"python manage.py runserver\" \"npx webpack --watch --mode=development\"",
     "build": "npx babel src --out-dir static/js & browserify static/js/index.js > static/js/compiled.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,13 +24,18 @@
     "react-redux": "^7.2.3",
     "react-spring": "^8.0.27",
     "redux": "^4.0.5",
+    "three": "^0.128.0",
     "three-js": "^79.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.1.0",
+    "css-loader": "^5.2.4",
+    "file-loader": "^6.2.0",
+    "style-loader": "^2.0.0",
     "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0"
   },

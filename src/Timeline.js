@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useSpring, animated} from 'react-spring'
 import Fade from '@material-ui/core/Fade';
 
+import '../static/css/timeline.css'
 
 // I usually use classbased components because I like the OOP feel, but I needed to use hooks for the react-spring animations here, so I used a function based component
 export default function Timeline (props) {

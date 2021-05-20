@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 
 import Bio from "./Bio.js"
 import BioHeader from "./BioHeader.js"
+import '../static/css/index.css'
 
 let screen = {width:1200,height:window.innerHeight-88};
 screen.aspect= screen.width/screen.height
@@ -75,7 +79,7 @@ renderer.setSize(screen.width,screen.height);
 
 let cont = document.getElementById("canvasContainer");
 // orbitControls gives ability to grab and move around
-let controls = new THREE.OrbitControls( camera,cont );
+let controls = new OrbitControls( camera,cont );
 // I don't want users to scroll out or move around
 controls.enableZoom = false;
 controls.enablePan = false;
@@ -84,7 +88,7 @@ cont.appendChild(renderer.domElement);
 // this will be used to store imported J model
 let letterJ; 
 
-let objLoader = new THREE.OBJLoader();
+let objLoader = new OBJLoader();
 objLoader.load('static/3d/LetterJ.obj',(object)=>{
     object=object.children[0]
     
