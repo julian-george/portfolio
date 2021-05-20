@@ -1,7 +1,7 @@
 ## Description
 This is my portfolio site, designed and coded by me. I wanted this site to be unique, efficient, and interactive, so I fit all relevant content into one fairly small, distinct one-page app. It took more time than it probably looks like, but I am pretty proud of it. 
 
-One large goal was for it to be maintainable for the foreseeable future, as I add more projects and skills to my repertoire. I accomplished this goal using Django and storing my projects/skills in a small Postgres DB.
+One large goal was for it to be maintainable for the foreseeable future, as I add more projects and skills to my repertoire. I accomplished this goal using Django and storing my projects/skills in a small Postgres DB. I also used webpack to make compiling and structure management far easier than before.
 
 There are a lot more aspects to this site, from my exploration into 3D modeling to all of the animations I utilized for the first time. To sum it all up, I experimented with a ton of new technologies and I endeavored to use best practices to showcase my development skills.
 
