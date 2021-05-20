@@ -65,10 +65,9 @@ class App extends React.Component {
     }
 }
 
-
-const domContainer = document.getElementById('react-content');
-ReactDOM.render(< App />, domContainer);
-
+// this will be used to store imported J model
+let letterJ; 
+let controls;
 // threejs boilerplate code
 const scene = new THREE.Scene();
 scene.background= new THREE.Color(0x262422);
@@ -77,20 +76,24 @@ camera.position.set(-300,0,0);
 let renderer = new THREE.WebGLRenderer();
 renderer.setSize(screen.width,screen.height);
 
+const initialize = () =>{
+    const domContainer = document.getElementById('react-content');
+    ReactDOM.render(< App />, domContainer);
 
-let cont = document.getElementById("canvasContainer");
-// orbitControls gives ability to grab and move around
-let controls = new OrbitControls( camera,cont );
-// I don't want users to scroll out or move around
-controls.enableZoom = false;
-controls.enablePan = false;
-cont.appendChild(renderer.domElement);
-
-// this will be used to store imported J model
-let letterJ; 
+    let cont = document.getElementById("canvasContainer");
+    // orbitControls gives ability to grab and move around
+    controls = new OrbitControls( camera,cont );
+    // I don't want users to scroll out or move around
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    cont.appendChild(renderer.domElement);
+}
 
 let objLoader = new OBJLoader();
 objLoader.load('static/3d/LetterJ.obj',(object)=>{
+    // initializes everything only after obj loaded
+    initialize()
+
     object=object.children[0]
     
     // taking geometry out of object and giving it new material so that the hue can be altered
@@ -120,14 +123,10 @@ const animate = ()=>{
     requestAnimationFrame(animate)
     letterJ.rotation.y+=0.005
     renderer.render(scene,camera)
-    controls.update()
+    if (controls) controls.update()
 }
 
 // window.addEventListener('resize', ()=>{
 //     renderer.setSize(screen.width,screen.height);
 //     camera.aspect=screen.aspect;
 // });
-
-
-
-
