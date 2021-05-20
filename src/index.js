@@ -23,6 +23,7 @@ Goals:
 - Use Redux to manage hue and to fix timeline
 - Add day mode?
 - Perfect design
+- Use CSS variables to store colors to make syncing them easier
 */
 class App extends React.Component {
     constructor(props){
