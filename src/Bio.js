@@ -4,6 +4,8 @@ import Fade from '@material-ui/core/Fade';
 import Timeline from "./Timeline.js"
 import SkillGrid from "./SkillGrid.js"
 
+import '../static/css/biohead.css'
+
 // this component encompasses everything outside of the threejs animation
 class Bio extends React.Component {
     constructor(props){

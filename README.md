@@ -35,8 +35,7 @@ Django and Postgres
     - Use `psql databasename < data_base_dump_file` to do so
     - databasename should be "portfolio"
 9. To create an admin user to create Skills and Projects, run `python manage.py createsuperuser`
-10. Run `npm run-script start` or `python manage.py runserver` to initialize app
-    - Every time you edit files in `./src`, run `npm build` to update the site.
+10. Run `npm run-script dev` to initialize app and to watch for changes as you edit
 11. Go to `localhost:8000` to view the site
 12. Go to `localhost:8000/admin` to add and edit Skills and Projects
     - Use user details from step 8

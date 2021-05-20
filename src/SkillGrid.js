@@ -1,6 +1,8 @@
 import React from 'react';
 import Fade from '@material-ui/core/Fade';
 
+import '../static/css/skills.css'
+
 class SkillGrid extends React.Component {
     constructor(props){
         super(props);
