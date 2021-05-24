@@ -38,7 +38,7 @@ Django and Postgres
 10. Run `npm run-script dev` to initialize app and to watch for changes as you edit
 11. Go to `localhost:8000` to view the site
 12. Go to `localhost:8000/admin` to add and edit Skills and Projects
-    - Use user details from step 8
+    - Use user details from step 9
     - Add Skills and Projects as desired
 
 
