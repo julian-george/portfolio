@@ -17,6 +17,7 @@ export default function BioHeader(props) {
     //adds event listener to move header upon scrolling past certain point, only on initialization
     useEffect(()=>{
         document.addEventListener('scroll', updateFocus)
+        document.addEventListener('resize', updateFocus)
     },[])
     return (
         <animated.div id ="hoverName" style={dispSpring}>

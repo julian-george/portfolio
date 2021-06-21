@@ -6,6 +6,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 
 import Bio from "./Bio.js"
 import BioHeader from "./BioHeader.js"
+import MobileMessage from "./MobileMessage.js"
 import '../static/css/index.css'
 
 let screen = {width:1200,height:window.innerHeight-88};
@@ -28,14 +29,23 @@ Goals:
 class App extends React.Component {
     constructor(props){
         super(props)
-        this.state={ hue:startingHue, bioActive:false }
-        this.changeHue= (component) => (newHue) => {
+        this.state={ hue:startingHue, bioActive:false, screenHeight: screen.height, mobile:(window.innerWidth<=1240) }
+        this.changeHue = (component) => (newHue) => {
             component.setState({hue:newHue})
         }
+        window.addEventListener('resize', ()=>{
+            screen = {width:1200,height:window.innerHeight-88};
+            screen.aspect= screen.width/screen.height;
+            
+            this.setState({mobile:(window.innerWidth<=1240), screenHeight:screen.height});
+            if (renderer) renderer.setSize(screen.width,screen.height);
+            if (camera) camera.aspect = screen.aspect;
+        })
     }
     //whenever the state changes, change the threejs J to the new hue
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState){
         if (letterJ) letterJ.material.color = new THREE.Color("hsl("+this.state.hue+",65%,40%)")
+        if (prevState.mobile&&!this.state.mobile&&renderer) document.getElementById("canvasContainer").appendChild(renderer.domElement);
     }
     
     render() {
@@ -45,9 +55,13 @@ class App extends React.Component {
         let tintedTextColor="hsl("+this.state.hue+",30%,79%)"
         let footerColor1="hsla("+this.state.hue+",60%,50%,.6)"
         let footerColor2="hsla("+this.state.hue+",60%,50%,1)"
-        
-        return (
+        if (this.state.mobile) return (
+        <div id = "fullContainer" style={{backgroundColor:fullContainerColor}}> 
+            <MobileMessage/>
+        </div>)
+        else return (
             <div id = "fullContainer" style={{backgroundColor:fullContainerColor}}> 
+                
                 <div id="canvasContainer" style={{height:screen.height}}>
                 </div>
                 <div id = "bio">
