@@ -9,7 +9,7 @@ export default function Timeline (props) {
     let currentProj= {
             name:"current",
             title:"What I'm Working On Now",
-            summary:"I'm currently working with the Magnuson Center, adding features and refining the MCCV platform for the 2021-2022 year. I'm also making slight edits to this portfolio as I apply to internships. I plan to make personal projects utilizing Typescript and/or Sass, two languages I've newly become familiar with.",
+            summary:"I'm currently working with Sedaro Technologies, an Arlington, VA startup that aims to revolutionize satellite engineering by creating a powerful, intuitive, and affordable platform for satellite mission design and simulation. I'm working heavily in Django on the backend and React/Redux in the frontend, and my skills in all areas have improved. I have designed UIs for new features, fixed front-end interface bugs, and tested my knowledge of Django models and data structures in a multi-week project. I have also been continuing work with the Magnuson center on the side, doing some extensive refactors to improve dev and user experience.",
             banner:false,
         }
     let projects = [currentProj,...loaded_data.projects]
