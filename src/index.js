@@ -101,7 +101,7 @@ class App extends React.Component {
           >
             <div>
               <div>Fully Designed and Developed By Julian George</div>
-              <div>Copyright © 2021 Julian George. All rights reserved.</div>
+              <div>Copyright © 2022 Julian George. All rights reserved.</div>
             </div>
           </div>
         </div>
