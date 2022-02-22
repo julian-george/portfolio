@@ -10,7 +10,7 @@ export default function Timeline(props) {
     name: "current",
     title: "What I'm Working On Now",
     summary:
-      "I'm currently working with the DALI lab, working on projects brought to us by our partners and supported by DALI's experienced senior members.",
+      "I'm currently working with the DALI lab, working on projects brought to us by our partners and supported by DALI's experienced senior members. In the spring I will continue that work and polish my skills by working on a couple personal projects I have planned out.",
     banner: false,
   };
   let projects = [currentProj, ...loaded_data.projects];
@@ -281,7 +281,7 @@ class ProjectInfo extends React.Component {
                 this.props.parent.toggleInfo();
               }}
             >
-              <span>🗙</span>
+              <span>x</span>
             </div>
             <div className="projectInfoHead">
               <div className="projectInfoTitle">{project.title}</div>
