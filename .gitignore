@@ -3,4 +3,5 @@ node_modules/
 .env
 staticfiles
 package-lock.json
-portfolioapp/migrations/
+static/js/compiled.js
+__pycache__
