@@ -5,3 +5,4 @@ staticfiles
 package-lock.json
 static/js/compiled.js
 __pycache__
+.DS_STORE
